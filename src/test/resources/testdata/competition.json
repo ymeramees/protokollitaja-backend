@@ -1,0 +1,3584 @@
+{
+  "id": "5e1f495e4e48bd44eba2550b",
+  "competitionName": "Eesti juunioride meistrivõistlus",
+  "timeAndPlace": "19. jaan. 2019 Rapla",
+  "events": [
+    {
+      "id": "1",
+      "eventName": "60l Õhupüss Meesjuuniorid",
+      "competitors": [
+        {
+          "id": "4",
+          "firstName": "Roman",
+          "lastName": "LOMONOSSOV",
+          "birthYear": "2000",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "101,0"
+                },
+                {
+                  "seriesSum": "100,2"
+                },
+                {
+                  "seriesSum": "102,4"
+                },
+                {
+                  "seriesSum": "102,2"
+                },
+                {
+                  "seriesSum": "101,1"
+                },
+                {
+                  "seriesSum": "101,7"
+                }
+              ],
+              "label": "",
+              "subtotal": "608,6"
+            }
+          ],
+          "totalResult": "608,6",
+          "innerTens": "32",
+          "finals": "237,6",
+          "remarks": ""
+        },
+        {
+          "id": "10",
+          "firstName": "Lauri",
+          "lastName": "LOPP",
+          "birthYear": "2000",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "100,1"
+                },
+                {
+                  "seriesSum": "96,2"
+                },
+                {
+                  "seriesSum": "95,4"
+                },
+                {
+                  "seriesSum": "98,7"
+                },
+                {
+                  "seriesSum": "101,5"
+                },
+                {
+                  "seriesSum": "100,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "592,4"
+            }
+          ],
+          "totalResult": "592,4",
+          "innerTens": "19",
+          "finals": "236,0",
+          "remarks": ""
+        },
+        {
+          "id": "1",
+          "firstName": "Mihhail",
+          "lastName": "IVANOV",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "98,6"
+                },
+                {
+                  "seriesSum": "99,4"
+                },
+                {
+                  "seriesSum": "101,9"
+                },
+                {
+                  "seriesSum": "101,7"
+                },
+                {
+                  "seriesSum": "102,0"
+                }
+              ],
+              "label": "",
+              "subtotal": "601,2"
+            }
+          ],
+          "totalResult": "601,2",
+          "innerTens": "34",
+          "finals": "213,5",
+          "remarks": ""
+        },
+        {
+          "id": "5",
+          "firstName": "Toomas",
+          "lastName": "KIRSS",
+          "birthYear": "2002",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "99,5"
+                },
+                {
+                  "seriesSum": "96,5"
+                },
+                {
+                  "seriesSum": "98,5"
+                },
+                {
+                  "seriesSum": "96,4"
+                },
+                {
+                  "seriesSum": "96,8"
+                },
+                {
+                  "seriesSum": "100,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "588,5"
+            }
+          ],
+          "totalResult": "588,5",
+          "innerTens": "19",
+          "finals": "191,5",
+          "remarks": ""
+        },
+        {
+          "id": "12",
+          "firstName": "Kahru",
+          "lastName": "MÄNNIK",
+          "birthYear": "2002",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "95,9"
+                },
+                {
+                  "seriesSum": "97,3"
+                },
+                {
+                  "seriesSum": "100,7"
+                },
+                {
+                  "seriesSum": "99,6"
+                },
+                {
+                  "seriesSum": "97,9"
+                }
+              ],
+              "label": "",
+              "subtotal": "589,0"
+            }
+          ],
+          "totalResult": "589,0",
+          "innerTens": "20",
+          "finals": "174,0",
+          "remarks": ""
+        },
+        {
+          "id": "14",
+          "firstName": "Artjom",
+          "lastName": "ERT",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "99,5"
+                },
+                {
+                  "seriesSum": "101,4"
+                },
+                {
+                  "seriesSum": "99,3"
+                },
+                {
+                  "seriesSum": "101,2"
+                },
+                {
+                  "seriesSum": "98,7"
+                },
+                {
+                  "seriesSum": "98,4"
+                }
+              ],
+              "label": "",
+              "subtotal": "598,5"
+            }
+          ],
+          "totalResult": "598,5",
+          "innerTens": "22",
+          "finals": "152,0",
+          "remarks": ""
+        },
+        {
+          "id": "3",
+          "firstName": "Martten",
+          "lastName": "TIITSMA",
+          "birthYear": "1999",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,0"
+                },
+                {
+                  "seriesSum": "99,0"
+                },
+                {
+                  "seriesSum": "98,9"
+                },
+                {
+                  "seriesSum": "100,7"
+                },
+                {
+                  "seriesSum": "100,0"
+                },
+                {
+                  "seriesSum": "97,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "592,7"
+            }
+          ],
+          "totalResult": "592,7",
+          "innerTens": "21",
+          "finals": "129,8",
+          "remarks": ""
+        },
+        {
+          "id": "37",
+          "firstName": "Vitali",
+          "lastName": "METLIK",
+          "birthYear": "1999",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "100,6"
+                },
+                {
+                  "seriesSum": "99,7"
+                },
+                {
+                  "seriesSum": "98,5"
+                },
+                {
+                  "seriesSum": "100,1"
+                },
+                {
+                  "seriesSum": "96,5"
+                },
+                {
+                  "seriesSum": "101,0"
+                }
+              ],
+              "label": "",
+              "subtotal": "596,4"
+            }
+          ],
+          "totalResult": "596,4",
+          "innerTens": "19",
+          "finals": "110,6",
+          "remarks": ""
+        },
+        {
+          "id": "13",
+          "firstName": "Martin",
+          "lastName": "VENDELIN",
+          "birthYear": "1999",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,7"
+                },
+                {
+                  "seriesSum": "95,9"
+                },
+                {
+                  "seriesSum": "97,9"
+                },
+                {
+                  "seriesSum": "97,8"
+                },
+                {
+                  "seriesSum": "99,9"
+                },
+                {
+                  "seriesSum": "97,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "587,0"
+            }
+          ],
+          "totalResult": "587,0",
+          "innerTens": "20",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "17",
+          "firstName": "Fjodor",
+          "lastName": "SEKAJEV",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "96,2"
+                },
+                {
+                  "seriesSum": "98,8"
+                },
+                {
+                  "seriesSum": "98,3"
+                },
+                {
+                  "seriesSum": "96,7"
+                },
+                {
+                  "seriesSum": "101,9"
+                },
+                {
+                  "seriesSum": "94,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "586,7"
+            }
+          ],
+          "totalResult": "586,7",
+          "innerTens": "15",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "8",
+          "firstName": "Karel",
+          "lastName": "UDRAS",
+          "birthYear": "2003",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,5"
+                },
+                {
+                  "seriesSum": "99,7"
+                },
+                {
+                  "seriesSum": "97,9"
+                },
+                {
+                  "seriesSum": "97,0"
+                },
+                {
+                  "seriesSum": "98,0"
+                },
+                {
+                  "seriesSum": "94,9"
+                }
+              ],
+              "label": "",
+              "subtotal": "585,0"
+            }
+          ],
+          "totalResult": "585,0",
+          "innerTens": "18",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "2",
+          "firstName": "Joosep Robin",
+          "lastName": "ALBERT",
+          "birthYear": "2002",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "97,7"
+                },
+                {
+                  "seriesSum": "100,1"
+                },
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "95,6"
+                },
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "95,0"
+                }
+              ],
+              "label": "",
+              "subtotal": "583,6"
+            }
+          ],
+          "totalResult": "583,6",
+          "innerTens": "18",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "11",
+          "firstName": "Silver",
+          "lastName": "LOORENS",
+          "birthYear": "1999",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "95,4"
+                },
+                {
+                  "seriesSum": "95,5"
+                },
+                {
+                  "seriesSum": "97,9"
+                },
+                {
+                  "seriesSum": "93,9"
+                },
+                {
+                  "seriesSum": "99,9"
+                },
+                {
+                  "seriesSum": "96,4"
+                }
+              ],
+              "label": "",
+              "subtotal": "579,0"
+            }
+          ],
+          "totalResult": "579,0",
+          "innerTens": "16",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "6",
+          "firstName": "Eerik",
+          "lastName": "SALF",
+          "birthYear": "2000",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "95,3"
+                },
+                {
+                  "seriesSum": "94,8"
+                },
+                {
+                  "seriesSum": "95,8"
+                },
+                {
+                  "seriesSum": "95,1"
+                },
+                {
+                  "seriesSum": "96,7"
+                },
+                {
+                  "seriesSum": "94,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "572,2"
+            }
+          ],
+          "totalResult": "572,2",
+          "innerTens": "12",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "7",
+          "firstName": "Kirill",
+          "lastName": "RUMJANTSEV",
+          "birthYear": "2004",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92,8"
+                },
+                {
+                  "seriesSum": "99,3"
+                },
+                {
+                  "seriesSum": "93,0"
+                },
+                {
+                  "seriesSum": "94,9"
+                },
+                {
+                  "seriesSum": "95,5"
+                },
+                {
+                  "seriesSum": "94,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "569,6"
+            }
+          ],
+          "totalResult": "569,6",
+          "innerTens": "13",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "16",
+          "firstName": "Georg Oliver",
+          "lastName": "HAUG",
+          "birthYear": "2000",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "94,4"
+                },
+                {
+                  "seriesSum": "89,8"
+                },
+                {
+                  "seriesSum": "91,8"
+                },
+                {
+                  "seriesSum": "97,0"
+                },
+                {
+                  "seriesSum": "96,5"
+                },
+                {
+                  "seriesSum": "88,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "558,0"
+            }
+          ],
+          "totalResult": "558,0",
+          "innerTens": "12",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "9",
+          "firstName": "Jander",
+          "lastName": "KORPE",
+          "birthYear": "2001",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92,3"
+                },
+                {
+                  "seriesSum": "91,4"
+                },
+                {
+                  "seriesSum": "94,5"
+                },
+                {
+                  "seriesSum": "85,8"
+                },
+                {
+                  "seriesSum": "93,5"
+                },
+                {
+                  "seriesSum": "92,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "550,0"
+            }
+          ],
+          "totalResult": "550,0",
+          "innerTens": "9",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "96",
+          "firstName": "Kalev",
+          "lastName": "KIVIOJA",
+          "birthYear": "2003",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92,7"
+                },
+                {
+                  "seriesSum": "96,0"
+                },
+                {
+                  "seriesSum": "93,1"
+                },
+                {
+                  "seriesSum": "89,3"
+                },
+                {
+                  "seriesSum": "84,9"
+                },
+                {
+                  "seriesSum": "93,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "549,5"
+            }
+          ],
+          "totalResult": "549,5",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "20",
+          "firstName": "Sten",
+          "lastName": "TARM",
+          "birthYear": "2004",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "88,1"
+                },
+                {
+                  "seriesSum": "89,0"
+                },
+                {
+                  "seriesSum": "94,3"
+                },
+                {
+                  "seriesSum": "95,3"
+                },
+                {
+                  "seriesSum": "92,9"
+                },
+                {
+                  "seriesSum": "88,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "547,7"
+            }
+          ],
+          "totalResult": "547,7",
+          "innerTens": "8",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "39",
+          "firstName": "Rando",
+          "lastName": "DÜÜNA",
+          "birthYear": "2002",
+          "club": "Kaiu LK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "83,7"
+                },
+                {
+                  "seriesSum": "96,0"
+                },
+                {
+                  "seriesSum": "83,9"
+                },
+                {
+                  "seriesSum": "91,4"
+                },
+                {
+                  "seriesSum": "82,3"
+                },
+                {
+                  "seriesSum": "89,5"
+                }
+              ],
+              "label": "",
+              "subtotal": "526,8"
+            }
+          ],
+          "totalResult": "526,8",
+          "innerTens": "6",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "18",
+          "firstName": "Kaido",
+          "lastName": "KRUUSAMÄE",
+          "birthYear": "1999",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "86,9"
+                },
+                {
+                  "seriesSum": "83,3"
+                },
+                {
+                  "seriesSum": "95,3"
+                },
+                {
+                  "seriesSum": "86,5"
+                },
+                {
+                  "seriesSum": "86,8"
+                },
+                {
+                  "seriesSum": "86,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "524,9"
+            }
+          ],
+          "totalResult": "524,9",
+          "innerTens": "5",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "19",
+          "firstName": "Greg-Mattias",
+          "lastName": "MURUMETS",
+          "birthYear": "2000",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "86,5"
+                },
+                {
+                  "seriesSum": "90,3"
+                },
+                {
+                  "seriesSum": "87,6"
+                },
+                {
+                  "seriesSum": "88,2"
+                },
+                {
+                  "seriesSum": "89,6"
+                },
+                {
+                  "seriesSum": "80,7"
+                }
+              ],
+              "label": "",
+              "subtotal": "522,9"
+            }
+          ],
+          "totalResult": "522,9",
+          "innerTens": "9",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "29",
+          "firstName": "Robin",
+          "lastName": "ROHILAID",
+          "birthYear": "2003",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "84,1"
+                },
+                {
+                  "seriesSum": "75,1"
+                },
+                {
+                  "seriesSum": "80,7"
+                },
+                {
+                  "seriesSum": "67,6"
+                },
+                {
+                  "seriesSum": "85,6"
+                },
+                {
+                  "seriesSum": "77,4"
+                }
+              ],
+              "label": "",
+              "subtotal": "470,5"
+            }
+          ],
+          "totalResult": "470,5",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "38",
+          "firstName": "Roger",
+          "lastName": "ROHILAID",
+          "birthYear": "2003",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "70,7"
+                },
+                {
+                  "seriesSum": "80,0"
+                },
+                {
+                  "seriesSum": "76,6"
+                },
+                {
+                  "seriesSum": "66,4"
+                },
+                {
+                  "seriesSum": "77,8"
+                },
+                {
+                  "seriesSum": "84,3"
+                }
+              ],
+              "label": "",
+              "subtotal": "455,8"
+            }
+          ],
+          "totalResult": "455,8",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "eventName": "60l Õhupüss Naisjuuniorid",
+      "competitors": [
+        {
+          "id": "30",
+          "firstName": "Katrin",
+          "lastName": "SMIRNOVA",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "101,9"
+                },
+                {
+                  "seriesSum": "104,0"
+                },
+                {
+                  "seriesSum": "103,1"
+                },
+                {
+                  "seriesSum": "104,0"
+                },
+                {
+                  "seriesSum": "103,6"
+                },
+                {
+                  "seriesSum": "100,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "617,4"
+            }
+          ],
+          "totalResult": "617,4",
+          "innerTens": "45",
+          "finals": "245,6",
+          "remarks": ""
+        },
+        {
+          "id": "25",
+          "firstName": "Sigrit",
+          "lastName": "JUHKAM",
+          "birthYear": "2000",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "98,7"
+                },
+                {
+                  "seriesSum": "99,2"
+                },
+                {
+                  "seriesSum": "100,2"
+                },
+                {
+                  "seriesSum": "100,8"
+                },
+                {
+                  "seriesSum": "100,5"
+                },
+                {
+                  "seriesSum": "97,2"
+                }
+              ],
+              "label": "",
+              "subtotal": "596,6"
+            }
+          ],
+          "totalResult": "596,6",
+          "innerTens": "22",
+          "finals": "243,7",
+          "remarks": ""
+        },
+        {
+          "id": "28",
+          "firstName": "Elise",
+          "lastName": "SAAR",
+          "birthYear": "2000",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "101,7"
+                },
+                {
+                  "seriesSum": "98,2"
+                },
+                {
+                  "seriesSum": "100,1"
+                },
+                {
+                  "seriesSum": "102,9"
+                },
+                {
+                  "seriesSum": "102,3"
+                },
+                {
+                  "seriesSum": "103,4"
+                }
+              ],
+              "label": "",
+              "subtotal": "608,6"
+            }
+          ],
+          "totalResult": "608,6",
+          "innerTens": "34",
+          "finals": "222,0",
+          "remarks": ""
+        },
+        {
+          "id": "24",
+          "firstName": "Anastassia",
+          "lastName": "OLEWICZ",
+          "birthYear": "2004",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "104,5"
+                },
+                {
+                  "seriesSum": "103,0"
+                },
+                {
+                  "seriesSum": "102,4"
+                },
+                {
+                  "seriesSum": "103,3"
+                },
+                {
+                  "seriesSum": "103,6"
+                },
+                {
+                  "seriesSum": "104,0"
+                }
+              ],
+              "label": "",
+              "subtotal": "620,8"
+            }
+          ],
+          "totalResult": "620,8",
+          "innerTens": "50",
+          "finals": "202,3",
+          "remarks": ""
+        },
+        {
+          "id": "26",
+          "firstName": "Marleen",
+          "lastName": "RIISAAR",
+          "birthYear": "2003",
+          "club": "Elva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "99,1"
+                },
+                {
+                  "seriesSum": "103,7"
+                },
+                {
+                  "seriesSum": "98,2"
+                },
+                {
+                  "seriesSum": "98,3"
+                },
+                {
+                  "seriesSum": "103,2"
+                },
+                {
+                  "seriesSum": "101,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "603,6"
+            }
+          ],
+          "totalResult": "603,6",
+          "innerTens": "27",
+          "finals": "180,5",
+          "remarks": ""
+        },
+        {
+          "id": "27",
+          "firstName": "Anastassia",
+          "lastName": "BOBÕLEVA",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "103,4"
+                },
+                {
+                  "seriesSum": "103,0"
+                },
+                {
+                  "seriesSum": "104,6"
+                },
+                {
+                  "seriesSum": "100,3"
+                },
+                {
+                  "seriesSum": "103,9"
+                },
+                {
+                  "seriesSum": "101,0"
+                }
+              ],
+              "label": "",
+              "subtotal": "616,2"
+            }
+          ],
+          "totalResult": "616,2",
+          "innerTens": "41",
+          "finals": "160,8",
+          "remarks": ""
+        },
+        {
+          "id": "21",
+          "firstName": "Maarika",
+          "lastName": "FINNE",
+          "birthYear": "2003",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "102,3"
+                },
+                {
+                  "seriesSum": "99,7"
+                },
+                {
+                  "seriesSum": "100,3"
+                },
+                {
+                  "seriesSum": "98,6"
+                },
+                {
+                  "seriesSum": "98,8"
+                },
+                {
+                  "seriesSum": "99,9"
+                }
+              ],
+              "label": "",
+              "subtotal": "599,6"
+            }
+          ],
+          "totalResult": "599,6",
+          "innerTens": "27",
+          "finals": "138,0",
+          "remarks": ""
+        },
+        {
+          "id": "22",
+          "firstName": "Marianne",
+          "lastName": "TAVITS",
+          "birthYear": "2000",
+          "club": "Elva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "101,2"
+                },
+                {
+                  "seriesSum": "101,3"
+                },
+                {
+                  "seriesSum": "97,1"
+                },
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "100,6"
+                },
+                {
+                  "seriesSum": "97,9"
+                }
+              ],
+              "label": "",
+              "subtotal": "595,7"
+            }
+          ],
+          "totalResult": "595,7",
+          "innerTens": "19",
+          "finals": "116,9",
+          "remarks": ""
+        },
+        {
+          "id": "35",
+          "firstName": "Adele Karolina",
+          "lastName": "KÕRE",
+          "birthYear": "2002",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "96,9"
+                },
+                {
+                  "seriesSum": "97,7"
+                },
+                {
+                  "seriesSum": "98,5"
+                },
+                {
+                  "seriesSum": "97,8"
+                },
+                {
+                  "seriesSum": "99,8"
+                },
+                {
+                  "seriesSum": "99,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "590,5"
+            }
+          ],
+          "totalResult": "590,5",
+          "innerTens": "18",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "34",
+          "firstName": "Anastassija",
+          "lastName": "KUŠKOVA",
+          "birthYear": "2001",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "96,9"
+                },
+                {
+                  "seriesSum": "93,1"
+                },
+                {
+                  "seriesSum": "98,9"
+                },
+                {
+                  "seriesSum": "99,0"
+                },
+                {
+                  "seriesSum": "96,7"
+                },
+                {
+                  "seriesSum": "91,8"
+                }
+              ],
+              "label": "",
+              "subtotal": "576,4"
+            }
+          ],
+          "totalResult": "576,4",
+          "innerTens": "17",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "31",
+          "firstName": "Egne",
+          "lastName": "PISARENKO",
+          "birthYear": "2000",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "96,0"
+                },
+                {
+                  "seriesSum": "96,7"
+                },
+                {
+                  "seriesSum": "96,4"
+                },
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "97,3"
+                },
+                {
+                  "seriesSum": "91,2"
+                }
+              ],
+              "label": "",
+              "subtotal": "575,2"
+            }
+          ],
+          "totalResult": "575,2",
+          "innerTens": "17",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "23",
+          "firstName": "Aileen",
+          "lastName": "UMAL",
+          "birthYear": "2000",
+          "club": "Kaiu LK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "95,4"
+                },
+                {
+                  "seriesSum": "93,5"
+                },
+                {
+                  "seriesSum": "96,1"
+                },
+                {
+                  "seriesSum": "98,0"
+                },
+                {
+                  "seriesSum": "92,8"
+                },
+                {
+                  "seriesSum": "98,3"
+                }
+              ],
+              "label": "",
+              "subtotal": "574,1"
+            }
+          ],
+          "totalResult": "574,1",
+          "innerTens": "17",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "33",
+          "firstName": "Kristina",
+          "lastName": "MÖLDER",
+          "birthYear": "2004",
+          "club": "Elva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "91,8"
+                },
+                {
+                  "seriesSum": "93,7"
+                },
+                {
+                  "seriesSum": "95,9"
+                },
+                {
+                  "seriesSum": "98,1"
+                },
+                {
+                  "seriesSum": "97,6"
+                },
+                {
+                  "seriesSum": "95,1"
+                }
+              ],
+              "label": "",
+              "subtotal": "572,2"
+            }
+          ],
+          "totalResult": "572,2",
+          "innerTens": "12",
+          "finals": "Fin",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "eventName": "60l Õhupüstol Meesjuuniorid",
+      "competitors": [
+        {
+          "id": "45",
+          "firstName": "Jegor",
+          "lastName": "ŠAHIN",
+          "birthYear": "2002",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "93"
+                }
+              ],
+              "label": "",
+              "subtotal": "545"
+            }
+          ],
+          "totalResult": "545",
+          "innerTens": "20",
+          "finals": "235,1",
+          "remarks": ""
+        },
+        {
+          "id": "61",
+          "firstName": "Kirill",
+          "lastName": "LEPMAN",
+          "birthYear": "2001",
+          "club": "Valga LK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "94"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "96"
+                },
+                {
+                  "seriesSum": "95"
+                }
+              ],
+              "label": "",
+              "subtotal": "563"
+            }
+          ],
+          "totalResult": "563",
+          "innerTens": "16",
+          "finals": "224,5",
+          "remarks": ""
+        },
+        {
+          "id": "44",
+          "firstName": "Elari",
+          "lastName": "TAHVINOV",
+          "birthYear": "2001",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "97"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "94"
+                }
+              ],
+              "label": "",
+              "subtotal": "553"
+            }
+          ],
+          "totalResult": "553",
+          "innerTens": "21",
+          "finals": "204,7",
+          "remarks": ""
+        },
+        {
+          "id": "60",
+          "firstName": "Karl Gregor",
+          "lastName": "JAKK",
+          "birthYear": "2000",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "94"
+                },
+                {
+                  "seriesSum": "94"
+                }
+              ],
+              "label": "",
+              "subtotal": "556"
+            }
+          ],
+          "totalResult": "556",
+          "innerTens": "18",
+          "finals": "183,7",
+          "remarks": ""
+        },
+        {
+          "id": "56",
+          "firstName": "Sten-Erik",
+          "lastName": "LINK",
+          "birthYear": "1999",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "94"
+                },
+                {
+                  "seriesSum": "96"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "95"
+                },
+                {
+                  "seriesSum": "92"
+                }
+              ],
+              "label": "",
+              "subtotal": "560"
+            }
+          ],
+          "totalResult": "560",
+          "innerTens": "11",
+          "finals": "165,6",
+          "remarks": ""
+        },
+        {
+          "id": "47",
+          "firstName": "Nikita",
+          "lastName": "DARGEL",
+          "birthYear": "2004",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "87"
+                }
+              ],
+              "label": "",
+              "subtotal": "525"
+            }
+          ],
+          "totalResult": "525",
+          "innerTens": "24",
+          "finals": "146,3",
+          "remarks": ""
+        },
+        {
+          "id": "59",
+          "firstName": "Ivan",
+          "lastName": "BULAEVSKY",
+          "birthYear": "2003",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "85"
+                }
+              ],
+              "label": "",
+              "subtotal": "538"
+            }
+          ],
+          "totalResult": "538",
+          "innerTens": "21",
+          "finals": "126,7",
+          "remarks": ""
+        },
+        {
+          "id": "42",
+          "firstName": "Ekke Alar",
+          "lastName": "TOOMINGAS",
+          "birthYear": "1999",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "95"
+                },
+                {
+                  "seriesSum": "91"
+                }
+              ],
+              "label": "",
+              "subtotal": "548"
+            }
+          ],
+          "totalResult": "548",
+          "innerTens": "17",
+          "finals": "101,7",
+          "remarks": ""
+        },
+        {
+          "id": "41",
+          "firstName": "Kristjan",
+          "lastName": "KOOSAPOEG",
+          "birthYear": "2002",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "88"
+                }
+              ],
+              "label": "",
+              "subtotal": "525"
+            }
+          ],
+          "totalResult": "525",
+          "innerTens": "23",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "52",
+          "firstName": "Erik",
+          "lastName": "MOORAST",
+          "birthYear": "2000",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "525"
+            }
+          ],
+          "totalResult": "525",
+          "innerTens": "22",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "101",
+          "firstName": "Jegor",
+          "lastName": "KALININ",
+          "birthYear": "1999",
+          "club": "Valga LK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "90"
+                }
+              ],
+              "label": "",
+              "subtotal": "525"
+            }
+          ],
+          "totalResult": "525",
+          "innerTens": "6",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "43",
+          "firstName": "Marchus-Joonas",
+          "lastName": "KOPPEL",
+          "birthYear": "2001",
+          "club": "Valga LK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "519"
+            }
+          ],
+          "totalResult": "519",
+          "innerTens": "27",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "57",
+          "firstName": "Egert",
+          "lastName": "AALDE",
+          "birthYear": "1999",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "87"
+                }
+              ],
+              "label": "",
+              "subtotal": "518"
+            }
+          ],
+          "totalResult": "518",
+          "innerTens": "22",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "98",
+          "firstName": "Jaanus",
+          "lastName": "LAIDUS",
+          "birthYear": "2004",
+          "club": "Väike-Maarja",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "80"
+                }
+              ],
+              "label": "",
+              "subtotal": "508"
+            }
+          ],
+          "totalResult": "508",
+          "innerTens": "28",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "50",
+          "firstName": "Taavi",
+          "lastName": "ILVES",
+          "birthYear": "2002",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "73"
+                }
+              ],
+              "label": "",
+              "subtotal": "503"
+            }
+          ],
+          "totalResult": "503",
+          "innerTens": "12",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "54",
+          "firstName": "Enar",
+          "lastName": "SIRENDI",
+          "birthYear": "2003",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "80"
+                }
+              ],
+              "label": "",
+              "subtotal": "491"
+            }
+          ],
+          "totalResult": "491",
+          "innerTens": "17",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "48",
+          "firstName": "Raian",
+          "lastName": "KLEEMANN",
+          "birthYear": "2005",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "77"
+                }
+              ],
+              "label": "",
+              "subtotal": "480"
+            }
+          ],
+          "totalResult": "480",
+          "innerTens": "30",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "58",
+          "firstName": "Kristjan",
+          "lastName": "TOKKO",
+          "birthYear": "2004",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "70"
+                }
+              ],
+              "label": "",
+              "subtotal": "477"
+            }
+          ],
+          "totalResult": "477",
+          "innerTens": "20",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "49",
+          "firstName": "Henri Eerik",
+          "lastName": "REINTAL",
+          "birthYear": "2005",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "73"
+                },
+                {
+                  "seriesSum": "73"
+                },
+                {
+                  "seriesSum": "75"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "77"
+                }
+              ],
+              "label": "",
+              "subtotal": "463"
+            }
+          ],
+          "totalResult": "463",
+          "innerTens": "29",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "55",
+          "firstName": "Kaspar",
+          "lastName": "TÕNISSON",
+          "birthYear": "2005",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "63"
+                },
+                {
+                  "seriesSum": "75"
+                },
+                {
+                  "seriesSum": "74"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "80"
+                }
+              ],
+              "label": "",
+              "subtotal": "449"
+            }
+          ],
+          "totalResult": "449",
+          "innerTens": "27",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "53",
+          "firstName": "Karlis",
+          "lastName": "LÕPS",
+          "birthYear": "2005",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "71"
+                },
+                {
+                  "seriesSum": "70"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "69"
+                },
+                {
+                  "seriesSum": "77"
+                }
+              ],
+              "label": "",
+              "subtotal": "447"
+            }
+          ],
+          "totalResult": "447",
+          "innerTens": "22",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "40",
+          "firstName": "Kert",
+          "lastName": "KALLAS",
+          "birthYear": "2003",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "67"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "72"
+                },
+                {
+                  "seriesSum": "64"
+                },
+                {
+                  "seriesSum": "75"
+                }
+              ],
+              "label": "",
+              "subtotal": "444"
+            }
+          ],
+          "totalResult": "444",
+          "innerTens": "26",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "46",
+          "firstName": "Peeter",
+          "lastName": "KAUS",
+          "birthYear": "2002",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "69"
+                },
+                {
+                  "seriesSum": "62"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "74"
+                }
+              ],
+              "label": "",
+              "subtotal": "438"
+            }
+          ],
+          "totalResult": "438",
+          "innerTens": "24",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "51",
+          "firstName": "Henri",
+          "lastName": "KORNILOV",
+          "birthYear": "2004",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "73"
+                },
+                {
+                  "seriesSum": "58"
+                },
+                {
+                  "seriesSum": "74"
+                },
+                {
+                  "seriesSum": "67"
+                },
+                {
+                  "seriesSum": "74"
+                },
+                {
+                  "seriesSum": "80"
+                }
+              ],
+              "label": "",
+              "subtotal": "426"
+            }
+          ],
+          "totalResult": "426",
+          "innerTens": "24",
+          "finals": "Fin",
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "eventName": "60l Õhupüstol Naisjuuniorid",
+      "competitors": [
+        {
+          "id": "69",
+          "firstName": "Aleksandra",
+          "lastName": "MOISSEJEVA",
+          "birthYear": "2002",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "94"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "94"
+                }
+              ],
+              "label": "",
+              "subtotal": "555"
+            }
+          ],
+          "totalResult": "555",
+          "innerTens": "11",
+          "finals": "228,2",
+          "remarks": ""
+        },
+        {
+          "id": "100",
+          "firstName": "Õnne-Liisi",
+          "lastName": "VIIDAS",
+          "birthYear": "2000",
+          "club": "Väike-Maarja",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "91"
+                }
+              ],
+              "label": "",
+              "subtotal": "534"
+            }
+          ],
+          "totalResult": "534",
+          "innerTens": "8",
+          "finals": "223,8",
+          "remarks": ""
+        },
+        {
+          "id": "63",
+          "firstName": "Alina",
+          "lastName": "KOVALJOVA",
+          "birthYear": "2001",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "94"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "86"
+                }
+              ],
+              "label": "",
+              "subtotal": "536"
+            }
+          ],
+          "totalResult": "536",
+          "innerTens": "4",
+          "finals": "203,6",
+          "remarks": ""
+        },
+        {
+          "id": "97",
+          "firstName": "Marta",
+          "lastName": "FROLOVA",
+          "birthYear": "2003",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "95"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "521"
+            }
+          ],
+          "totalResult": "521",
+          "innerTens": "6",
+          "finals": "180,6",
+          "remarks": ""
+        },
+        {
+          "id": "66",
+          "firstName": "Kairi-Liis",
+          "lastName": "ROONURM",
+          "birthYear": "2000",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "91"
+                }
+              ],
+              "label": "",
+              "subtotal": "538"
+            }
+          ],
+          "totalResult": "538",
+          "innerTens": "4",
+          "finals": "163,6",
+          "remarks": ""
+        },
+        {
+          "id": "93",
+          "firstName": "Liisa Greta",
+          "lastName": "KOPPELMAA",
+          "birthYear": "2000",
+          "club": "KL MäLK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "93"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "90"
+                }
+              ],
+              "label": "",
+              "subtotal": "529"
+            }
+          ],
+          "totalResult": "529",
+          "innerTens": "7",
+          "finals": "142,3",
+          "remarks": ""
+        },
+        {
+          "id": "78",
+          "firstName": "Elerin",
+          "lastName": "ROSS",
+          "birthYear": "2004",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "83"
+                }
+              ],
+              "label": "",
+              "subtotal": "520"
+            }
+          ],
+          "totalResult": "520",
+          "innerTens": "7",
+          "finals": "123,6",
+          "remarks": ""
+        },
+        {
+          "id": "71",
+          "firstName": "Grete",
+          "lastName": "ROOSTIK",
+          "birthYear": "2002",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "83"
+                }
+              ],
+              "label": "",
+              "subtotal": "524"
+            }
+          ],
+          "totalResult": "524",
+          "innerTens": "6",
+          "finals": "103,5",
+          "remarks": ""
+        },
+        {
+          "id": "77",
+          "firstName": "Helle",
+          "lastName": "LEIS",
+          "birthYear": "1999",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "90"
+                }
+              ],
+              "label": "",
+              "subtotal": "519"
+            }
+          ],
+          "totalResult": "519",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "81",
+          "firstName": "Andra",
+          "lastName": "SOOPA",
+          "birthYear": "2001",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "91"
+                }
+              ],
+              "label": "",
+              "subtotal": "517"
+            }
+          ],
+          "totalResult": "517",
+          "innerTens": "4",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "72",
+          "firstName": "Anna",
+          "lastName": "HUSSU",
+          "birthYear": "2004",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "511"
+            }
+          ],
+          "totalResult": "511",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "74",
+          "firstName": "Helena",
+          "lastName": "TASANE",
+          "birthYear": "2002",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "88"
+                }
+              ],
+              "label": "",
+              "subtotal": "508"
+            }
+          ],
+          "totalResult": "508",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "76",
+          "firstName": "Maire",
+          "lastName": "PÄRN",
+          "birthYear": "2001",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "92"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "81"
+                }
+              ],
+              "label": "",
+              "subtotal": "507"
+            }
+          ],
+          "totalResult": "507",
+          "innerTens": "2",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "83",
+          "firstName": "Darja",
+          "lastName": "ZEMLJANUHHINA",
+          "birthYear": "2003",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "90"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "82"
+                }
+              ],
+              "label": "",
+              "subtotal": "506"
+            }
+          ],
+          "totalResult": "506",
+          "innerTens": "5",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "82",
+          "firstName": "Anni",
+          "lastName": "KALLAS",
+          "birthYear": "2001",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "72"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "89"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "87"
+                }
+              ],
+              "label": "",
+              "subtotal": "501"
+            }
+          ],
+          "totalResult": "501",
+          "innerTens": "6",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "88",
+          "firstName": "Hanna Renata",
+          "lastName": "KOTTISE",
+          "birthYear": "2001",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "72"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "88"
+                }
+              ],
+              "label": "",
+              "subtotal": "501"
+            }
+          ],
+          "totalResult": "501",
+          "innerTens": "4",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "65",
+          "firstName": "Marja",
+          "lastName": "KIRSS",
+          "birthYear": "2003",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "88"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "82"
+                }
+              ],
+              "label": "",
+              "subtotal": "499"
+            }
+          ],
+          "totalResult": "499",
+          "innerTens": "5",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "79",
+          "firstName": "Steffi",
+          "lastName": "SALU",
+          "birthYear": "2003",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "87"
+                }
+              ],
+              "label": "",
+              "subtotal": "496"
+            }
+          ],
+          "totalResult": "496",
+          "innerTens": "6",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "75",
+          "firstName": "Katrin",
+          "lastName": "PIIRIMAA",
+          "birthYear": "2000",
+          "club": "Põlva SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "81"
+                }
+              ],
+              "label": "",
+              "subtotal": "496"
+            }
+          ],
+          "totalResult": "496",
+          "innerTens": "2",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "64",
+          "firstName": "Kärt",
+          "lastName": "VASSAR",
+          "birthYear": "1999",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "91"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "69"
+                },
+                {
+                  "seriesSum": "85"
+                }
+              ],
+              "label": "",
+              "subtotal": "493"
+            }
+          ],
+          "totalResult": "493",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "80",
+          "firstName": "Anastassia",
+          "lastName": "LOPATTI",
+          "birthYear": "2003",
+          "club": "Narva LSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "80"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "78"
+                }
+              ],
+              "label": "",
+              "subtotal": "492"
+            }
+          ],
+          "totalResult": "492",
+          "innerTens": "2",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "94",
+          "firstName": "Marielle",
+          "lastName": "SÄREL",
+          "birthYear": "2004",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "82"
+                }
+              ],
+              "label": "",
+              "subtotal": "490"
+            }
+          ],
+          "totalResult": "490",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "73",
+          "firstName": "Birgitta",
+          "lastName": "VARE",
+          "birthYear": "2003",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "87"
+                }
+              ],
+              "label": "",
+              "subtotal": "489"
+            }
+          ],
+          "totalResult": "489",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "67",
+          "firstName": "Ele-Riin",
+          "lastName": "NIIT",
+          "birthYear": "2002",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "488"
+            }
+          ],
+          "totalResult": "488",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "70",
+          "firstName": "Liisalota",
+          "lastName": "KROON",
+          "birthYear": "2002",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "80"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "76"
+                }
+              ],
+              "label": "",
+              "subtotal": "488"
+            }
+          ],
+          "totalResult": "488",
+          "innerTens": "1",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "90",
+          "firstName": "Loretta",
+          "lastName": "SILM",
+          "birthYear": "2004",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "71"
+                },
+                {
+                  "seriesSum": "84"
+                },
+                {
+                  "seriesSum": "86"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "83"
+                },
+                {
+                  "seriesSum": "84"
+                }
+              ],
+              "label": "",
+              "subtotal": "484"
+            }
+          ],
+          "totalResult": "484",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "86",
+          "firstName": "Carmen",
+          "lastName": "VELTMANN",
+          "birthYear": "2004",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "85"
+                },
+                {
+                  "seriesSum": "82"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "75"
+                }
+              ],
+              "label": "",
+              "subtotal": "474"
+            }
+          ],
+          "totalResult": "474",
+          "innerTens": "5",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "85",
+          "firstName": "Veronika",
+          "lastName": "DEYKOVA",
+          "birthYear": "2003",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "74"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "73"
+                },
+                {
+                  "seriesSum": "88"
+                }
+              ],
+              "label": "",
+              "subtotal": "468"
+            }
+          ],
+          "totalResult": "468",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "62",
+          "firstName": "Anna-Liisa",
+          "lastName": "ESAJAS",
+          "birthYear": "2005",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "87"
+                },
+                {
+                  "seriesSum": "72"
+                },
+                {
+                  "seriesSum": "77"
+                },
+                {
+                  "seriesSum": "79"
+                },
+                {
+                  "seriesSum": "74"
+                }
+              ],
+              "label": "",
+              "subtotal": "465"
+            }
+          ],
+          "totalResult": "465",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "99",
+          "firstName": "Merily",
+          "lastName": "TAMBIK",
+          "birthYear": "2003",
+          "club": "Väike-Maarja",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "74"
+                },
+                {
+                  "seriesSum": "80"
+                },
+                {
+                  "seriesSum": "81"
+                },
+                {
+                  "seriesSum": "71"
+                },
+                {
+                  "seriesSum": "80"
+                }
+              ],
+              "label": "",
+              "subtotal": "464"
+            }
+          ],
+          "totalResult": "464",
+          "innerTens": "3",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "91",
+          "firstName": "Laura-Liis",
+          "lastName": "NÕMME",
+          "birthYear": "2001",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "75"
+                },
+                {
+                  "seriesSum": "65"
+                },
+                {
+                  "seriesSum": "70"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "78"
+                },
+                {
+                  "seriesSum": "85"
+                }
+              ],
+              "label": "",
+              "subtotal": "451"
+            }
+          ],
+          "totalResult": "451",
+          "innerTens": "7",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "84",
+          "firstName": "Mirle-Merlin",
+          "lastName": "JÄRS",
+          "birthYear": "2005",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "68"
+                },
+                {
+                  "seriesSum": "71"
+                },
+                {
+                  "seriesSum": "80"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "70"
+                },
+                {
+                  "seriesSum": "78"
+                }
+              ],
+              "label": "",
+              "subtotal": "443"
+            }
+          ],
+          "totalResult": "443",
+          "innerTens": "8",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "89",
+          "firstName": "Mai-Liis",
+          "lastName": "VIKMAN",
+          "birthYear": "2005",
+          "club": "SK Haapsalu",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "70"
+                },
+                {
+                  "seriesSum": "68"
+                },
+                {
+                  "seriesSum": "75"
+                },
+                {
+                  "seriesSum": "66"
+                },
+                {
+                  "seriesSum": "71"
+                },
+                {
+                  "seriesSum": "70"
+                }
+              ],
+              "label": "",
+              "subtotal": "420"
+            }
+          ],
+          "totalResult": "420",
+          "innerTens": "6",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "87",
+          "firstName": "Ketely",
+          "lastName": "ŽDANOV",
+          "birthYear": "2005",
+          "club": "Viljandi SpK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "69"
+                },
+                {
+                  "seriesSum": "73"
+                },
+                {
+                  "seriesSum": "65"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "76"
+                },
+                {
+                  "seriesSum": "56"
+                }
+              ],
+              "label": "",
+              "subtotal": "415"
+            }
+          ],
+          "totalResult": "415",
+          "innerTens": "9",
+          "finals": "Fin",
+          "remarks": ""
+        },
+        {
+          "id": "95",
+          "firstName": "Simona",
+          "lastName": "SEPPET",
+          "birthYear": "2006",
+          "club": "Ülenurme GSK",
+          "subtotals": [
+            {
+              "series": [
+                {
+                  "seriesSum": "44"
+                },
+                {
+                  "seriesSum": "42"
+                },
+                {
+                  "seriesSum": "61"
+                },
+                {
+                  "seriesSum": "52"
+                },
+                {
+                  "seriesSum": "70"
+                },
+                {
+                  "seriesSum": "61"
+                }
+              ],
+              "label": "",
+              "subtotal": "330"
+            }
+          ],
+          "totalResult": "330",
+          "innerTens": "20",
+          "finals": "Fin",
+          "remarks": ""
+        }
+      ]
+    }
+  ],
+  "_class": "ee.zone.web.protokollitajawebserver.entity.Competition"
+}

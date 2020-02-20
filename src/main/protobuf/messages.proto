@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "scalapb/scalapb.proto";
+
+option(scalapb.options) = {
+    package_name: "ee.zone.web.protokollitaja.backend.proto"
+    flat_package: true
+};
+
+message PSeries {
+    string _id = 1;
+    string seriesSum = 2;
+}
+
+message PCompetitor {
+    string _id = 1;
+    string fistName = 2;
+    string lastName = 3;
+    string birthYear = 4;
+    string club = 5;
+    repeated PSeries series = 7;
+    string totalResult = 8;
+    string innerTens = 9;
+    string finals = 10;
+    string remarks = 11;
+}
