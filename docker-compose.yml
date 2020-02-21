@@ -11,6 +11,8 @@ services:
       - mongo-data:/data/db
     ports:
       - 3005:3005
+    environment:
+      TZ: "Europe/Tallinn"
     env_file:
       - ./../protokollitaja-backend.env
     container_name: protokollitaja-backend

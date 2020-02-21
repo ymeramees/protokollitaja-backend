@@ -74,12 +74,6 @@ trait WithResources {
     }
 
     def getAllUsers: Future[Seq[User]] = ???
-
-    //  def withApiServer(dummyPersistence: PersistenceBase)(testCode: PersistenceBase => Any): Any = {
-    //    TestKit.spawn()
-    //    try {
-    //      testCode(dummyPersistence)
-    //    }
   }
 
 }

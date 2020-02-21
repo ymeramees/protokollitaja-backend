@@ -1,14 +1,7 @@
-import java.util.Properties
+package ee.zone.web.protokollitaja.backend.playground
 
-import ee.zone.web.protokollitaja.backend.entities.{Competitor, Series}
-import ee.zone.web.protokollitaja.backend.proto.PSeries
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-import org.json4s._
-import org.json4s.jackson.JsonMethods._
+import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
-import org.json4s.jackson.Serialization.write
-
-//case class Shot(shot: Double, x: Double, y: Double)
 
 object JsonKafkaTest /*extends App*/ {
   implicit val formats = Serialization.formats(NoTypeHints)

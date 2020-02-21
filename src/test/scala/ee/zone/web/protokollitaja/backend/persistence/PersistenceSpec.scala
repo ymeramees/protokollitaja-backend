@@ -113,32 +113,14 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "save and return a competition" in {
-      //            implicit val formats: AnyRef with Formats = Serialization.formats(NoTypeHints)
-      //      implicit val formats = DefaultFormats + new ObjectIdSerializer
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
-          //          val json = parse(resource.mkString).transformField { // Hack to serialize _id to ObjectId
-          //            case ("_id", s: JValue) =>
-          //              val idString = s.extract[String]
-          //              if (idString.startsWith("5e") && idString.length == 24) {
-          //                ("_id", parse("{\"$oid\":\"" + s.extract[String] + "\"}"))
-          //              } else {
-          //                ("_id", s)
-          //              }
-          //          }
           val competition = json.extract[Competition]
 
-          //          competitions.foreach { competition =>
-          Await.result(persistence.saveCompetition(competition /*.copy(_id = new ObjectId((json \ "_id").extract[String]))*/), 1.second)
-          //          }
+          Await.result(persistence.saveCompetition(competition), 1.second)
           val competitors = persistence.getEventCompetitors("5e1f495e4e48bd44eba2550b", "5")
-//          competitors.get.eventName shouldBe "60l Õhupüss Naisjuuniorid"
           competitors.length shouldBe 13
           competitors.head.firstName shouldBe "Katrin"
-
-
-        //          event.last._id shouldBe competitions.head.events.last._id
-        //          event.last.eventName shouldBe competitions.head.events.last.eventName
       }
       persistence.cleanUpDatabase()
     }
@@ -203,18 +185,13 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "return competition headers" in {
-      //      implicit val formats: AnyRef with Formats = Serialization.formats(NoTypeHints)
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
-          //          val json = parse(resource.mkString)
           val competitions = json.extract[List[Competition]]
 
           competitions.foreach { competition =>
             Await.result(persistence.saveCompetition(competition), 1.second)
-            //            println(s"Saved competition ${competition.competitionName}")
           }
-          //          println(s"Comps: $competitions")
-          //          println(persistence.getCompetitionHeaders)
           val headers = persistence.getCompetitionHeaders
           headers.length shouldBe 2
 
@@ -235,10 +212,8 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "return competition events' headers" in {
-      //      implicit val formats: AnyRef with Formats = Serialization.formats(NoTypeHints)
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
-          //          val json = parse(resource.mkString)
           val competitions = json.extract[List[Competition]]
 
           competitions.foreach { competition =>
@@ -257,25 +232,16 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "return requested event" in {
-      //      implicit val formats: AnyRef with Formats = Serialization.formats(NoTypeHints)
-      //      implicit val formats = DefaultFormats + FieldSerializer[Competition]()
-      //      implicit val formats = DefaultFormats + new ObjectIdSerializer
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
-          //          val json = parse(resource.mkString)
           val competitions = json.extract[List[Competition]]
 
           competitions.foreach { competition =>
-            Await.result(persistence.saveCompetition(competition /*.copy(_id = new ObjectId((json \ "_id").extract[List[String]].head.toString))*/), 1.second)
+            Await.result(persistence.saveCompetition(competition), 1.second)
           }
           val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3")
-//          event.get.eventName shouldBe "J Pruksi Karikas 60l Õhupüss Mehed"
           competitors.length shouldBe 18
           competitors.head.firstName shouldBe "Joosep robin"
-
-
-        //          event.last._id shouldBe competitions.head.events.last._id
-        //          event.last.eventName shouldBe competitions.head.events.last.eventName
       }
       persistence.cleanUpDatabase()
     }
@@ -292,7 +258,6 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           persistence.getEventsLoadCount shouldBe 0
 
           val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3")
-//          competitors.get.eventName shouldBe "J Pruksi Karikas 60l Õhupüss Mehed"
           competitors.length shouldBe 18
 
           persistence.getEventsLoadCount shouldBe 1

@@ -1,3 +1,5 @@
+package ee.zone.web.protokollitaja.backend.playground
+
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.HttpMethods.GET
@@ -106,8 +108,8 @@ class WebSocketSingleServer extends Actor { // extends Actor with Directives {
 
 }
 
-//case class GetWebSocketFlow()
+//case class ee.zone.web.protokollitaja.backend.playground.GetWebSocketFlow()
 
-//case class Start(host: String, port: Int)
+//case class ee.zone.web.protokollitaja.backend.playground.Start(host: String, port: Int)
 
-//case class Stop()
+//case class ee.zone.web.protokollitaja.backend.playground.Stop()

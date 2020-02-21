@@ -1,12 +1,12 @@
+package ee.zone.web.protokollitaja.backend.playground
+
 import akka.actor.{ActorSystem, Props}
-import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import akka.pattern.ask
-import scala.concurrent.duration._
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
-import scala.util.{Failure, Success}
+import scala.concurrent.duration._
 
 object WSServerMain /*extends App*/ {
 
@@ -31,7 +31,6 @@ object WSServerMain /*extends App*/ {
   println(s"Press Return to stop...")
   StdIn.readLine()
   (wsServer ? Stop)(3.seconds) onComplete (_ => system.terminate())
-  import system.dispatcher
 
   //  bindingFuture.flatMap(_.unbind()).onComplete(_ => system.terminate())
 

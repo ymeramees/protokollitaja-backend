@@ -1,3 +1,5 @@
+package ee.zone.web.protokollitaja.backend.playground
+
 import java.util
 import java.util.Properties
 
@@ -6,9 +8,8 @@ import ee.zone.web.protokollitaja.backend.proto.PSeries
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.TopicPartition
 import org.json4s.DefaultFormats
-import org.json4s.jackson.JsonMethods._
-
-import scala.collection.JavaConverters._
+import org.json4s.jackson.JsonMethods.parse
+import scala.jdk.CollectionConverters._
 
 object KafkaConsumerTest /*extends App*/ {
 

@@ -4,11 +4,9 @@ import com.github.t3hnar.bcrypt._
 import com.mongodb.client.result.UpdateResult
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
-import ee.zone.web.protokollitaja.backend.entities.{Competition, CompetitionHeader, Competitor, Event, EventHeader, Series, Subtotals, User}
+import ee.zone.web.protokollitaja.backend.entities._
 import ee.zone.web.protokollitaja.backend.metrics.Metrics
 import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
-import org.bson.codecs.configuration.CodecRegistry
-import org.bson.types.ObjectId
 import org.mongodb.scala._
 import org.mongodb.scala.bson.ObjectId
 import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
@@ -26,10 +24,6 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
   private val userCodecRegistry = fromRegistries(fromProviders(classOf[User]), DEFAULT_CODEC_REGISTRY)
   private val competitionCodecRegistry = fromRegistries(fromProviders(classOf[Competition], classOf[Event], classOf[Competitor], classOf[Series], classOf[Subtotals]), DEFAULT_CODEC_REGISTRY)
   private val metricsCodecRegistry = fromRegistries(fromProviders(classOf[Metrics]), DEFAULT_CODEC_REGISTRY)
-//  private val eventCodecRegistry = fromRegistries(fromProviders(classOf[Event]), DEFAULT_CODEC_REGISTRY)
-//  private val competitorCodecRegistry = fromRegistries(fromProviders(classOf[Competitor]), DEFAULT_CODEC_REGISTRY)
-//  private val seriesCodecRegistry = fromRegistries(fromProviders(classOf[Series]), DEFAULT_CODEC_REGISTRY)
-//  private val subtotalsCodecRegistry = fromRegistries(fromProviders(classOf[Subtotals]), DEFAULT_CODEC_REGISTRY)
 
   private val mongoClient = MongoClient(s"mongodb://${config.getString("db.addr")}:${config.getInt("db.port")}")
   Thread.sleep(100)
@@ -61,9 +55,9 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
 
   def getCompetitionHeaders: Seq[CompetitionHeader] = {
     println("Reading competition headers")
-    val competitions = Await.result(competitionsCollection.find().toFuture(), 500.millis)
+    val competitions = Await.result(competitionsCollection.find().sort(orderBy(descending("_id"))).toFuture(), 500.millis)
     logger.debug(s"Number of competitions found: ${competitions.length}")
-    competitions.map(c => new CompetitionHeader(c._id.toString, c.competitionName, c.timeAndPlace))
+    competitions.map(c => CompetitionHeader(c._id.toString, c.competitionName, c.timeAndPlace))
   }
 
   def getEventHeaders(competitionId: String): Seq[EventHeader] = {
@@ -72,7 +66,7 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
 
       case Some(competition) =>
         logger.debug(s"Number of events found in ${competition.competitionName}: ${competition.events.length}")
-        competition.events.map(event => EventHeader(/*new ObjectId(*/ event._id.toString, event.eventName))
+        competition.events.map(event => EventHeader(event._id.toString, event.eventName))
 
       case _ =>
         logger.warn(s"getEventHeaders: competitionId $competitionId not found!")
@@ -225,10 +219,6 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
     usersCollection.find(equal("username", username)).map(u => (u.password, u.accessLevel)).headOption()
   }
 
-//  def getUserAccessLevel(username: String): Future[Option[Int]] = {
-//    usersCollection.find(equal("username", username)).map(_.accessLevel).headOption()
-//  }
-
   def getAllUsers: Future[Seq[User]] = {
     usersCollection.find().sort(ascending("username")).toFuture()
   }
@@ -240,28 +230,4 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
   def cleanUpDatabase(): Completed = { // Used in unit tests
     Await.result(database.drop().toFuture(), 1.second)
   }
-
-  //  val observable: SingleObservable[Long] = usersCollection.countDocuments()
-  //  observable.subscribe(new Observer[Long] {
-  //
-  //    override def onNext(result: Long): Unit = println(s"Items in users usersCollection: ${result}")
-  //
-  //    override def onError(e: Throwable): Unit = println("Failed")
-  //
-  //    override def onComplete(): Unit = println("Completed")
-  //  })
-  //  val count = Await.result(usersCollection.countDocuments().head(), 1.second)
-  //  logger.info(s"Items in users usersCollection: $count")
-  //  val first = Await.result(usersCollection.find().first().head(), 1.second)
-  //  logger.info(s"First item in users: $first")
-  //
-  //  val lauri = Await.result(usersCollection.find(equal("username", "lauri")).first().toFuture(), 1.second)
-  //  logger.info(s"$lauri")
-  //
-  //  val nimekiri = Await.result(usersCollection.find().sort(ascending("username")).toFuture(), 1.second)
-  //  nimekiri.foreach{ n =>
-  //    println(s"$n")
-  //  }
-  //  usersCollection.updateOne(equal("username", "lauri"), set("accessLevel", 3)).toFuture()
-
 }

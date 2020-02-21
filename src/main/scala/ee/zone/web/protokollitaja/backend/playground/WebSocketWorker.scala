@@ -1,3 +1,5 @@
+package ee.zone.web.protokollitaja.backend.playground
+
 import akka.actor.Actor
 import akka.http.scaladsl.model.ws.{BinaryMessage, Message, TextMessage}
 import akka.stream.scaladsl.{Flow, GraphDSL, Keep, Sink, Source}

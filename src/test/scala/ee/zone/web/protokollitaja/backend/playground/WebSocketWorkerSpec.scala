@@ -1,16 +1,17 @@
+package ee.zone.web.protokollitaja.backend.playground
+
 import akka.http.scaladsl.testkit.{ScalatestRouteTest, WSProbe}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import scala.concurrent.duration._
 
 class WebSocketWorkerSpec extends AnyWordSpec with Matchers with ScalatestRouteTest {
 
   "The WSServerWorker" should {
     "respond to messages" in {
-      //      val wsServer = new WebSocketServer
+      //      val wsServer = new ee.zone.web.protokollitaja.backend.playground.WebSocketServer
       val wsClient = WSProbe()
 
-//      WS("/greeter", wsClient.flow) ~> WebSocketServer.route ~>
+//      WS("/greeter", wsClient.flow) ~> ee.zone.web.protokollitaja.backend.playground.WebSocketServer.route ~>
 //        check {
 //          isWebSocketUpgrade shouldBe true
 //
@@ -23,7 +24,7 @@ class WebSocketWorkerSpec extends AnyWordSpec with Matchers with ScalatestRouteT
     }
 
     //    "respond wth bad request to requests for incorrect path" in {
-    //      val wsServer = new WebSocketServer
+    //      val wsServer = new ee.zone.web.protokollitaja.backend.playground.WebSocketServer
     //      val wsClient = WSProbe()
     //
     //      WS("/hello", wsClient.flow) ~> wsServer.route ~>

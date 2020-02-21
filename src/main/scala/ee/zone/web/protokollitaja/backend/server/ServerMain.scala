@@ -1,6 +1,5 @@
 package ee.zone.web.protokollitaja.backend.server
 
-import java.io.{File, FileInputStream}
 import java.nio.file.{Files, Paths}
 import java.security.{KeyStore, SecureRandom}
 
