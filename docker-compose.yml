@@ -3,12 +3,20 @@ services:
   db:
     image: mongo
     container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+      - mongo-configdb:/data/configdb
+    ports:
+      - 27017:27017
+    environment:
+      TZ: "Europe/Tallinn"
+    networks:
+      - backend
 
   protokollitaja-backend:
     image: protokollitaja-backend
     volumes:
       - /data:/data
-      - mongo-data:/data/db
     ports:
       - 3005:3005
     environment:
@@ -18,8 +26,14 @@ services:
     container_name: protokollitaja-backend
     depends_on:
       - db
-    links:
-      - db
+    networks:
+      - backend
+
+networks:
+  backend:
 
 volumes:
   mongo-data:
+    name: mongo-data
+  mongo-configdb:
+    name: mongo-configdb
