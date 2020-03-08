@@ -34,7 +34,7 @@ libraryDependencies ++= {
     "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
 //    "org.mongodb.scala" %% "mongo-scala-bson" % "2.8.0",
 //    "com.lightbend.akka" %% "akka-stream-alpakka-mongodb" % "1.1.2"
-    "org.mongodb.scala" %% "mongo-scala-driver" % "2.8.0",
+    "org.mongodb.scala" %% "mongo-scala-driver" % "2.8.0"
   )
 }
 

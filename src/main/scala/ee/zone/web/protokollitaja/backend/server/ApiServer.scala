@@ -2,7 +2,7 @@ package ee.zone.web.protokollitaja.backend.server
 
 import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext, Behaviors}
 import akka.actor.typed.{Behavior, Scheduler}
-import akka.http.scaladsl.model.{RequestEntity, StatusCodes}
+import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.{Directives, RequestContext, Route, RouteResult}
 import akka.stream.Materializer
 import akka.stream.scaladsl.Sink
@@ -30,7 +30,8 @@ object ApiServer {
   }
 }
 
-class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)(implicit parserDispatcher: ExecutionContext) extends AbstractBehavior[BackendMsg](context) with Directives with LazyLogging {
+class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)(implicit parserDispatcher: ExecutionContext)
+  extends AbstractBehavior[BackendMsg](context) with Directives with LazyLogging with CorsHandler {
 
   implicit val materializer: Materializer = Materializer(context)
   implicit val formats: Formats = DefaultFormats + new ObjectIdSerializer
@@ -52,7 +53,8 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
         pathEnd {
           get { // GET is without authentication
             val competitionHeaders = write(persistence.getCompetitionHeaders)
-            complete(StatusCodes.OK -> competitionHeaders)
+            val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, competitionHeaders))
+            complete(response)
           } ~ Route.seal { // PUT and POST require authentication
             put {
               Authenticator.bcryptAuthAsync("secure site", persistence, Authenticator.bcryptAuthenticator) { userNameAndLevel =>
@@ -104,7 +106,8 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
       path("competitions" / Segment) { competitionId =>
         pathEndOrSingleSlash {
           val eventHeaders = write(persistence.getEventHeaders(competitionId))
-          complete(StatusCodes.OK -> eventHeaders)
+          val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, eventHeaders))
+          complete(response)
         }
       }
     }
@@ -119,7 +122,8 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
                 .map(_.copy(birthYear = ""))
             ).replace("_id", "id")
             logger.info(s"Number of times competitors have been asked: ${persistence.getEventsLoadCount}")
-            complete(StatusCodes.OK -> event)
+            val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, event))
+            complete(response)
           } else {
             complete(StatusCodes.BadRequest)
           }
@@ -127,11 +131,14 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
       }
     }
 
-  val route: Route = pathPrefix("api") {
-    pathPrefix("v1") {
-      competitions ~ events ~ results
-    }
-  }
+  val route: Route =
+    corsHandler(
+      pathPrefix("api") {
+        pathPrefix("v1") {
+          competitions ~ events ~ results
+        }
+      }
+    )
 
   private def extractData(entity: RequestEntity, requestContext: RequestContext): Future[Option[JValue]] = {
     val dataFuture = entity.httpEntity.dataBytes.runWith(Sink.fold[String, ByteString]("")((text, bs) => {
