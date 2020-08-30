@@ -23,7 +23,7 @@ object ServerMain extends LazyLogging {
       val config = ConfigFactory.load()
       val persistence = new Persistence(config)
       val parserDispatcher = context.system.dispatchers.lookup(DispatcherSelector.fromConfig("parser-dispatcher"))
-      val apiServer = context.spawn(ApiServer(persistence, parserDispatcher), "apiServer")
+      val apiServer = context.spawn(ApiServer(persistence, parserDispatcher, config), "apiServer")
       context.watch(apiServer)
 
       implicit val actorSystem: actor.ActorSystem = context.system.toClassic

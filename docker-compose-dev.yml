@@ -7,30 +7,30 @@ services:
       - mongo-data:/data/db
       - mongo-configdb:/data/configdb
     ports:
-      - 27017:27017
+      - 27016:27017
     environment:
       TZ: "Europe/Tallinn"
     networks:
-      - backend
+      - backend-dev
 
   protokollitaja-backend:
     image: protokollitaja-backend
     volumes:
       - /data:/data
     ports:
-      - 3005:3005
+      - 3004:3005
     environment:
       TZ: "Europe/Tallinn"
     env_file:
-      - ./../protokollitaja-backend.env
+      - ./../protokollitaja-backend.env.development
     container_name: protokollitaja-backend
     depends_on:
       - db
     networks:
-      - backend
+      - backend-dev
 
 networks:
-  backend:
+  backend-dev:
 
 volumes:
   mongo-data:

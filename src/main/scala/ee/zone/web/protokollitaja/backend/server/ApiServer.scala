@@ -7,6 +7,7 @@ import akka.http.scaladsl.server.{Directives, RequestContext, Route, RouteResult
 import akka.stream.Materializer
 import akka.stream.scaladsl.Sink
 import akka.util.ByteString
+import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import ee.zone.web.protokollitaja.backend.auth.Authenticator
 import ee.zone.web.protokollitaja.backend.entities.Competition
@@ -21,20 +22,22 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
 
 object ApiServer {
-  def apply(persistence: PersistenceBase, parserDispatcher: ExecutionContext): Behavior[BackendMsg] = {
+  def apply(persistence: PersistenceBase, parserDispatcher: ExecutionContext, config: Config): Behavior[BackendMsg] = {
     Behaviors.setup { context =>
       implicit val materializer: Materializer = Materializer(context)
       implicit val scheduler: Scheduler = context.system.scheduler
-      new ApiServer(context, persistence)(parserDispatcher)
+      new ApiServer(context, persistence, config)(parserDispatcher)
     }
   }
 }
 
-class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)(implicit parserDispatcher: ExecutionContext)
+class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase, config: Config)(implicit parserDispatcher: ExecutionContext)
   extends AbstractBehavior[BackendMsg](context) with Directives with LazyLogging with CorsHandler {
 
   implicit val materializer: Materializer = Materializer(context)
   implicit val formats: Formats = DefaultFormats + new ObjectIdSerializer
+
+  private val MAX_COMPETITION_PAYLOAD = config.getLong("server.max_competition_payload")
 
   override def onMessage(msg: BackendMsg): Behavior[BackendMsg] = msg match {
     case GetRoute(from) =>
@@ -62,7 +65,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
                 if (accessLevel > 0) {
                   extractRequestEntity { entity =>
                     requestContext =>
-                      extractData(entity, requestContext).flatMap {
+                      extractData(entity.withSizeLimit(MAX_COMPETITION_PAYLOAD), requestContext).flatMap {
                         case Some(competitionJson) =>
                           handleCompetitionUpdate(competitionJson, requestContext)
                         case _ =>
@@ -81,7 +84,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
                 if (accessLevel > 0) {
                   extractRequestEntity { entity =>
                     requestContext =>
-                      extractData(entity, requestContext).flatMap {
+                      extractData(entity.withSizeLimit(MAX_COMPETITION_PAYLOAD), requestContext).flatMap {
                         case Some(competitionJson) =>
                           handleCompetitionSave(competitionJson, requestContext)
 
@@ -149,10 +152,12 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase)
         val json = parse(dataString).transformField { // Hack to serialize id to ObjectId
           case ("id", s: JValue) =>
             val idString = s.extract[String]
-            if (idString.startsWith("5e") && idString.length == 24) {
-              ("_id", parse("{\"$oid\":\"" + s.extract[String] + "\"}"))
-            } else {
-              ("_id", s)
+            val competitionIdRegex = "^5(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+$".r  // Start with 5, at least 1 letter and 1 digit with only letters and digits
+            idString match {
+              case competitionIdRegex(_*) =>
+                ("_id", parse("{\"$oid\":\"" + idString + "\"}"))
+              case _ =>
+                ("_id", s)
             }
         }
         Future(Some(json))

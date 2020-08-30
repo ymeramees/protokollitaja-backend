@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  protokollitaja-backend:
+    image: protokollitaja-backend
+    volumes:
+      - /data:/data
+    ports:
+      - 3005:3005
+    environment:
+      TZ: "Europe/Tallinn"
+    env_file:
+      - ./../protokollitaja-backend.env
+    container_name: protokollitaja-backend
+    networks:
+      - backend
+
+networks:
+  backend:

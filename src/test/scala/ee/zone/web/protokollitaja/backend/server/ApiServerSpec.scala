@@ -5,6 +5,7 @@ import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.headers.BasicHttpCredentials
 import akka.http.scaladsl.model.{MessageEntity, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import com.typesafe.config.ConfigFactory
 import ee.zone.web.protokollitaja.backend.WithResources
 import ee.zone.web.protokollitaja.backend.entities.{CompetitionHeader, Competitor, EventHeader}
 import ee.zone.web.protokollitaja.backend.protocol.BackendProtocol.{BackendMsg, GetRoute, SendRoute}
@@ -19,6 +20,7 @@ class ApiServerSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
   val testKit = ActorTestKit()
 
   implicit val formats = DefaultFormats + new ObjectIdSerializer
+  val config = ConfigFactory.load()
   private val persistence = new DummyPersistence(
     competitionHeadersList = List(CompetitionHeader("5e1ae2cc4cfa124b351b0954", "Eesti juunioride meistrivõistlus", "19. jaan. 2019 Rapla")),
     eventHeadersList = List(EventHeader("3", "60l Õhupüss Naised")),
@@ -26,7 +28,7 @@ class ApiServerSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
   )
 
   private val parserDispatcher = system.dispatchers.lookup("parser-dispatcher")
-  private val apiServer = testKit.spawn(ApiServer(persistence, parserDispatcher), "apiServer")
+  private val apiServer = testKit.spawn(ApiServer(persistence, parserDispatcher, config), "apiServer")
   private val probe = testKit.createTestProbe[BackendMsg]()
   apiServer ! GetRoute(probe.ref)
   private val route = probe.expectMessageType[SendRoute].route
