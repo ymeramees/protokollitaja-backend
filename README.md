@@ -1,6 +1,6 @@
 # Protokollitaja Backend
 New implementation of back-end server for shooting sport ranking and results display software [Protokollitaja](https://github.com/ymeramees/protokollitaja) and results [webpage](http://web.zone.ee/protokollitaja/).
-Currently in initial dirty stage (i.e. a lot of Await.result's are being used).
+Currently in initial stage and with basic functionality.
 
 ### Main Features
 * REST API to upload results from Protokollitaja and serve them to the webpage

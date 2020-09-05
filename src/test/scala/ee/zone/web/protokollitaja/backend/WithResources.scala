@@ -50,13 +50,13 @@ trait WithResources {
 
     def getCompetition(competitionId: String): Future[Option[Competition]] = ???
 
-    def getCompetitionHeaders: Seq[CompetitionHeader] = competitionHeadersList
+    def getCompetitionHeaders: Future[Seq[CompetitionHeader]] = Future.successful(competitionHeadersList)
 
-    def getEventHeaders(competitionId: String): Seq[EventHeader] = eventHeadersList
+    def getEventHeaders(competitionId: String): Future[Seq[EventHeader]] = Future.successful(eventHeadersList)
 
-    def getEventCompetitors(competitionId: String, eventId: String): Seq[Competitor] = eventCompetitors
+    def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]] = Future.successful(eventCompetitors)
 
-    def getEventsLoadCount: Int = 11
+    def getEventsLoadCount: Future[Int] = Future.successful(11)
 
     def changeUserPassword(username: String, oldPassword: String, newPassword: String): Future[UpdateResult] = ???
 

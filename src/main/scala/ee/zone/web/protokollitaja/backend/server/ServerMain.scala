@@ -21,6 +21,9 @@ object ServerMain extends LazyLogging {
   def apply(): Behavior[BackendMsg] =
     Behaviors.setup { context =>
       val config = ConfigFactory.load()
+
+      implicit val executionContext: ExecutionContextExecutor = context.executionContext
+
       val persistence = new Persistence(config)
       val parserDispatcher = context.system.dispatchers.lookup(DispatcherSelector.fromConfig("parser-dispatcher"))
       val apiServer = context.spawn(ApiServer(persistence, parserDispatcher, config), "apiServer")
@@ -28,7 +31,6 @@ object ServerMain extends LazyLogging {
 
       implicit val actorSystem: actor.ActorSystem = context.system.toClassic
 
-      implicit val executionContext: ExecutionContextExecutor = context.executionContext
       val host = config.getString("server.addr")
       val port = config.getInt("server.port")
 

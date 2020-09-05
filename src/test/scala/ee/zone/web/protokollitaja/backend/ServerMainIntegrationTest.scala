@@ -63,7 +63,7 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
     }
 
     "return a competition id to new competition POST request and return same competition to next GET request" in {
-      persistence.saveUser(User("testuser", "testuserPass", 1))
+      Await.result(persistence.saveUser(User("testuser", "testuserPass", 1)), 1.second)
       withTextFile("testdata/competition.json") {
         txt =>
           val credentials = BasicHttpCredentials("testuser", "testuserPass")
@@ -80,7 +80,7 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
 
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
-          implicit val formats = DefaultFormats + new ObjectIdSerializer
+          implicit val formats: Formats = DefaultFormats + new ObjectIdSerializer
 
           val competition = json.extract[Competition]
           val response = Await.result(
@@ -109,7 +109,7 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
     "return an event from an existing competition to a GET request" in {
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
-          implicit val formats = DefaultFormats + new ObjectIdSerializer
+          implicit val formats: Formats = DefaultFormats + new ObjectIdSerializer
 
           val competition = json.extract[Competition]
           Await.result(persistence.saveCompetition(competition), 1.second)

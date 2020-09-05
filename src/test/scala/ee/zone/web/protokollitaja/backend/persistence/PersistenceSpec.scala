@@ -8,15 +8,17 @@ import org.json4s._
 import org.json4s.mongo.ObjectIdSerializer
 import org.mongodb.scala.bson.ObjectId
 import org.scalatest.BeforeAndAfterAll
+import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.{Await, ExecutionContext}
 
 class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll with WithResources {
 
   implicit val formats = DefaultFormats + new ObjectIdSerializer
+  implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
 
   val config = ConfigFactory.load()
   val persistence = new Persistence(config)
@@ -62,9 +64,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       val newPassword = "someNiceNewPass"
 
       Await.result(persistence.saveUser(user), 1.second)
-      Await.result(persistence.changeUserPassword(user.username, password, newPassword), 1.second)
+      Await.result(persistence.changeUserPassword(user.username, password, newPassword), 2.second)
 
-      val changedPassword = Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second)
+      val changedPassword = persistence.getPasswordAndAccessLevel(user.username).futureValue
       changedPassword.get should not be password
       newPassword.isBcryptedSafe(changedPassword.get._1).getOrElse(false) shouldBe true
     }
@@ -80,7 +82,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       }
       exception.getMessage shouldBe "Username and/or old password do not match!"
 
-      val dbPassword = Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second)
+      val dbPassword = persistence.getPasswordAndAccessLevel(user.username).futureValue
       dbPassword.get should not be password
       password.isBcryptedSafe(dbPassword.get._1).getOrElse(false) shouldBe true
     }
@@ -95,7 +97,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       }
       exception.getMessage shouldBe "Username and/or old password do not match!"
 
-      val dbPassword = Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second)
+      val dbPassword = persistence.getPasswordAndAccessLevel(user.username).futureValue
       dbPassword shouldBe None
     }
 
@@ -108,7 +110,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "return empty Seq if there are no competitions in the DB" in {
-      val headers = persistence.getCompetitionHeaders
+      val headers = persistence.getCompetitionHeaders.futureValue
       headers.length shouldBe 0
     }
 
@@ -118,7 +120,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           val competition = json.extract[Competition]
 
           Await.result(persistence.saveCompetition(competition), 1.second)
-          val competitors = persistence.getEventCompetitors("5e1f495e4e48bd44eba2550b", "5")
+          val competitors = persistence.getEventCompetitors("5e1f495e4e48bd44eba2550b", "5").futureValue
           competitors.length shouldBe 13
           competitors.head.firstName shouldBe "Katrin"
       }
@@ -192,7 +194,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitions.foreach { competition =>
             Await.result(persistence.saveCompetition(competition), 1.second)
           }
-          val headers = persistence.getCompetitionHeaders
+          val headers = persistence.getCompetitionHeaders.futureValue
           headers.length shouldBe 2
 
           headers.head.id shouldBe competitions.head._id.toString
@@ -207,7 +209,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     }
 
     "return empty Seq if competition Id was not found" in {
-      val headers = persistence.getEventHeaders("5e22ef4c072cb80d41fb6adf")
+      val headers = persistence.getEventHeaders("5e22ef4c072cb80d41fb6adf").futureValue
       headers.length shouldBe 0
     }
 
@@ -219,7 +221,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitions.foreach { competition =>
             Await.result(persistence.saveCompetition(competition), 1.second)
           }
-          val eventHeaders = persistence.getEventHeaders(competitions.head._id.toString)
+          val eventHeaders = persistence.getEventHeaders(competitions.head._id.toString).futureValue
           eventHeaders.length shouldBe 4
 
           eventHeaders.head.id shouldBe competitions.head.events.head._id
@@ -239,7 +241,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitions.foreach { competition =>
             Await.result(persistence.saveCompetition(competition), 1.second)
           }
-          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3")
+          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3").futureValue
           competitors.length shouldBe 18
           competitors.head.firstName shouldBe "Joosep robin"
       }
@@ -255,12 +257,12 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
             Await.result(persistence.saveCompetition(competition), 1.second)
           }
 
-          persistence.getEventsLoadCount shouldBe 0
+          persistence.getEventsLoadCount.futureValue shouldBe 0
 
-          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3")
+          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3").futureValue
           competitors.length shouldBe 18
 
-          persistence.getEventsLoadCount shouldBe 1
+          persistence.getEventsLoadCount.futureValue shouldBe 1
       }
       persistence.cleanUpDatabase()
     }

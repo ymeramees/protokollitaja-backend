@@ -16,10 +16,10 @@ import org.mongodb.scala.model.Sorts._
 import org.mongodb.scala.model.Updates._
 
 import scala.concurrent.duration._
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
-class Persistence(config: Config) extends PersistenceBase with LazyLogging {
+class Persistence(config: Config)(implicit ec: ExecutionContext) extends PersistenceBase with LazyLogging {
 
   private val userCodecRegistry = fromRegistries(fromProviders(classOf[User]), DEFAULT_CODEC_REGISTRY)
   private val competitionCodecRegistry = fromRegistries(fromProviders(classOf[Competition], classOf[Event], classOf[Competitor], classOf[Series], classOf[Subtotals]), DEFAULT_CODEC_REGISTRY)
@@ -53,20 +53,19 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
     competitionsCollection.find(equal("competitionName", competitionName)).headOption
   }
 
-  def getCompetitionHeaders: Seq[CompetitionHeader] = {
+  def getCompetitionHeaders: Future[Seq[CompetitionHeader]] = {
     println("Reading competition headers")
-    val competitions = Await.result(competitionsCollection.find().sort(orderBy(descending("_id"))).toFuture(), 500.millis)
-    logger.debug(s"Number of competitions found: ${competitions.length}")
-    competitions.map(c => CompetitionHeader(c._id.toString, c.competitionName, c.timeAndPlace))
+    competitionsCollection.find().sort(orderBy(descending("_id"))).toFuture().map { competitions =>
+      logger.debug(s"Number of competitions found: ${competitions.length}")
+      competitions.map(c => CompetitionHeader(c._id.toString, c.competitionName, c.timeAndPlace))
+    }
   }
 
-  def getEventHeaders(competitionId: String): Seq[EventHeader] = {
-    val competition = Await.result(getCompetition(competitionId), 500.millis)
-    competition match {
-
+  def getEventHeaders(competitionId: String): Future[Seq[EventHeader]] = {
+    getCompetition(competitionId).map {
       case Some(competition) =>
         logger.debug(s"Number of events found in ${competition.competitionName}: ${competition.events.length}")
-        competition.events.map(event => EventHeader(event._id.toString, event.eventName))
+        competition.events.map(event => EventHeader(event._id, event.eventName))
 
       case _ =>
         logger.warn(s"getEventHeaders: competitionId $competitionId not found!")
@@ -74,14 +73,11 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
     }
   }
 
-  def getEventCompetitors(competitionId: String, eventId: String): Seq[Competitor] = {
-    val competition = Await.result(getCompetition(competitionId), 500.millis)
-    competition match {
-
+  def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]] = {
+    getCompetition(competitionId).map {
       case Some(competition) =>
         eventsLoadCountPlusOne()
-        competition.events.find(event => event._id.toString == eventId) match {
-
+        competition.events.find(event => event._id == eventId) match {
           case Some(e) =>
             logger.debug(s"Number of competitiors found in ${competition.competitionName} in ${e.eventName}: ${e.competitors.length}")
             e.competitors
@@ -97,27 +93,24 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
     }
   }
 
-  def getEventsLoadCount: Int = {
-    Await.result(metricsCollection.find().headOption(), 500.millis) match {
+  def getEventsLoadCount: Future[Int] = {
+    metricsCollection.find().headOption().flatMap {
 
       case Some(metrics) =>
-        metrics.eventsLoadCount
+        Future.successful(metrics.eventsLoadCount)
 
       case _ => // Events not requested yet and count not initialized, initialize
-        Await.result(metricsCollection.insertOne(Metrics(0)).toFuture(), 500.millis)
-        0
+        metricsCollection.insertOne(Metrics(0)).toFuture().map(_ => 0)
     }
   }
 
-  def eventsLoadCountPlusOne(): Unit = {
-    Await.result(
-      metricsCollection.updateOne(exists("eventsLoadCount"), inc("eventsLoadCount", 1)).toFuture(),
-      500.millis)
+  def eventsLoadCountPlusOne(): Future[UpdateResult] = {
+    metricsCollection.updateOne(exists("eventsLoadCount"), inc("eventsLoadCount", 1)).toFuture()
   }
 
   def changeUserPassword(username: String, oldPassword: String, newPassword: String): Future[UpdateResult] = {
     // If same username exists and old password is correct, save the new password
-    Await.result(getPasswordAndAccessLevel(username), 50.millis) match {
+    getPasswordAndAccessLevel(username).flatMap {
       case Some(password) =>
         if (oldPassword.isBcryptedSafe(password._1).getOrElse(false)) {
           createBcryptedPassword(newPassword) match {
@@ -158,8 +151,7 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
   }
 
   def saveCompetition(newCompetition: Competition): Future[Completed] = {
-    val maybeExistingCompetition = Await.result(getCompetition(newCompetition._id), 50.millis)
-    maybeExistingCompetition match {
+    getCompetition(newCompetition._id).flatMap {
 
       case Some(_) =>
         val responseString = s"Competition with id ${newCompetition._id} already existing! Use PUT request to update an existing competition!"
@@ -167,8 +159,7 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
         Future.failed(new RuntimeException(responseString))
 
       case _ =>
-        val maybeExistingName = Await.result(getCompetitionByName(newCompetition.competitionName), 50.millis)
-        maybeExistingName match {
+        getCompetitionByName(newCompetition.competitionName).flatMap {
 
           case Some(competition) =>
             val responseString = s"Competition with same name already existing, id: ${competition._id}!"
@@ -183,8 +174,7 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
   }
 
   def updateCompetition(newCompetition: Competition): Future[Competition] = {
-    val maybeExistingCompetition = Await.result(getCompetition(newCompetition._id), 50.millis)
-    maybeExistingCompetition match {
+    getCompetition(newCompetition._id).flatMap {
 
       case Some(_) =>
         logger.info(s"Updating competition: ${newCompetition.competitionName}, id:${newCompetition._id} ")
@@ -199,19 +189,20 @@ class Persistence(config: Config) extends PersistenceBase with LazyLogging {
 
   def saveUser(newUser: User): Future[Completed] = {
     // If same username exists, do not save
-    if (Await.result(usersCollection.find(equal("username", newUser.username)).toFuture(), 500.millis).isEmpty) {
-      createBcryptedPassword(newUser.password) match {
+    usersCollection.find(equal("username", newUser.username)).toFuture().flatMap {
+      case Seq() =>
+        createBcryptedPassword(newUser.password) match {
 
-        case Success(hashedPassword) =>
-          logger.info(s"New user saved: ${newUser._id} - ${newUser.username}")
-          usersCollection.insertOne(newUser.copy(password = hashedPassword)).toFuture()
+          case Success(hashedPassword) =>
+            logger.info(s"New user saved: ${newUser._id} - ${newUser.username}")
+            usersCollection.insertOne(newUser.copy(password = hashedPassword)).toFuture()
 
-        case Failure(exception) =>
-          Future.failed(exception)
-      }
-    } else {
-      logger.warn(s"User ${newUser.username} already exists!")
-      Future.failed(new RuntimeException("User with this username already exists!"))
+          case Failure(exception) =>
+            Future.failed(exception)
+        }
+      case _ =>
+        logger.warn(s"User ${newUser.username} already exists!")
+        Future.failed(new RuntimeException("User with this username already exists!"))
     }
   }
 

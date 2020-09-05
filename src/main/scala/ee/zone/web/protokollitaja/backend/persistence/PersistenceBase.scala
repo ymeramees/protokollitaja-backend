@@ -10,13 +10,13 @@ abstract class PersistenceBase {
 
   def getCompetition(competitionId: String): Future[Option[Competition]]
 
-  def getCompetitionHeaders: Seq[CompetitionHeader]
+  def getCompetitionHeaders: Future[Seq[CompetitionHeader]]
 
-  def getEventHeaders(competitionId: String): Seq[EventHeader]
+  def getEventHeaders(competitionId: String): Future[Seq[EventHeader]]
 
-  def getEventCompetitors(competitionId: String, eventId: String): Seq[Competitor]
+  def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]]
 
-  def getEventsLoadCount: Int
+  def getEventsLoadCount: Future[Int]
 
   def changeUserPassword(username: String, oldPassword: String, newPassword: String): Future[UpdateResult]
 

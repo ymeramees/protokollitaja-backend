@@ -18,8 +18,7 @@ import org.json4s.jackson.Serialization.write
 import org.json4s.mongo.ObjectIdSerializer
 import org.json4s.{DefaultFormats, Formats, JValue}
 
-import scala.concurrent.duration._
-import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.concurrent.{ExecutionContext, Future}
 
 object ApiServer {
   def apply(persistence: PersistenceBase, parserDispatcher: ExecutionContext, config: Config): Behavior[BackendMsg] = {
@@ -55,9 +54,10 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       path("competitions") {
         pathEnd {
           get { // GET is without authentication
-            val competitionHeaders = write(persistence.getCompetitionHeaders)
-            val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, competitionHeaders))
-            complete(response)
+            onSuccess(persistence.getCompetitionHeaders) { headers =>
+              val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, write(headers)))
+              complete(response)
+            }
           } ~ Route.seal { // PUT and POST require authentication
             put {
               Authenticator.bcryptAuthAsync("secure site", persistence, Authenticator.bcryptAuthenticator) { userNameAndLevel =>
@@ -108,9 +108,10 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
     get {
       path("competitions" / Segment) { competitionId =>
         pathEndOrSingleSlash {
-          val eventHeaders = write(persistence.getEventHeaders(competitionId))
-          val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, eventHeaders))
-          complete(response)
+          onSuccess(persistence.getEventHeaders(competitionId)) { eventHeaders =>
+            val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, write(eventHeaders)))
+            complete(response)
+          }
         }
       }
     }
@@ -120,13 +121,13 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       path("competitions" / Segments(2)) { idsList =>
         pathEndOrSingleSlash {
           if (idsList.length == 2) {
-            val event = write(
-              persistence.getEventCompetitors(idsList.head, idsList.last)
-                .map(_.copy(birthYear = ""))
-            ).replace("_id", "id")
-            logger.info(s"Number of times competitors have been asked: ${persistence.getEventsLoadCount}")
-            val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, event))
-            complete(response)
+            onSuccess(persistence.getEventCompetitors(idsList.head, idsList.last)) { e =>
+              val event = write(e.map(_.copy(birthYear = "")))
+                .replace("_id", "id")
+              logger.info(s"Number of times competitors have been asked: ${persistence.getEventsLoadCount}")
+              val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, event))
+              complete(response)
+            }
           } else {
             complete(StatusCodes.BadRequest)
           }
@@ -148,46 +149,44 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       (text.appendedAll(bs.utf8String))
     }))
     try {
-      dataFuture.flatMap { dataString =>
-        val json = parse(dataString).transformField { // Hack to serialize id to ObjectId
+      dataFuture.map { dataString =>
+        Some(parse(dataString).transformField { // Hack to serialize id to ObjectId
           case ("id", s: JValue) =>
             val idString = s.extract[String]
-            val competitionIdRegex = "^5(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+$".r  // Start with 5, at least 1 letter and 1 digit with only letters and digits
+            val competitionIdRegex = "^5(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+$".r // Start with 5, at least 1 letter and 1 digit with only letters and digits
             idString match {
               case competitionIdRegex(_*) =>
                 ("_id", parse("{\"$oid\":\"" + idString + "\"}"))
               case _ =>
                 ("_id", s)
             }
-        }
-        Future(Some(json))
+        })
       }
-
     } catch {
       case exception: Exception =>
         logger.error(s"DataFuture failed with an exception: $exception")
-        Future(None)
+        Future.failed(exception)
     }
   }
 
   private def handleCompetitionUpdate(json: JValue, requestContext: RequestContext): Future[RouteResult] = {
     val competition = json.extract[Competition]
-    persistence.updateCompetition(competition).flatMap { _ =>
+    persistence.updateCompetition(competition).map { _ =>
       requestContext.complete(StatusCodes.OK -> s"${competition._id.toString}")
     } recover {
       case e: RuntimeException =>
-        Await.result(requestContext.complete(StatusCodes.BadRequest -> e.getMessage), 1.second)
+        requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
     }
-  }
+  }.flatten
 
 
   private def handleCompetitionSave(json: JValue, requestContext: RequestContext): Future[RouteResult] = {
     val competition = json.extract[Competition]
-    persistence.saveCompetition(competition).flatMap { _ =>
+    persistence.saveCompetition(competition).map { _ =>
       requestContext.complete(StatusCodes.Created -> s"${competition._id.toString}")
     } recover {
       case e: RuntimeException =>
-        Await.result(requestContext.complete(StatusCodes.BadRequest -> e.getMessage), 1.second)
+        requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
     }
-  }
+  }.flatten
 }
