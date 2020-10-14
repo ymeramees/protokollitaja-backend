@@ -7,7 +7,7 @@ val conf = ConfigFactory.parseFile(new File("src/main/resources/application.conf
 
 name := "protokollitaja-backend"
 
-version := "0.1"
+version := "0.1.1"
 
 scalaVersion := "2.13.1"
 

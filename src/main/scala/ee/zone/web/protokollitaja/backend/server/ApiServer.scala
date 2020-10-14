@@ -19,6 +19,7 @@ import org.json4s.mongo.ObjectIdSerializer
 import org.json4s.{DefaultFormats, Formats, JValue}
 
 import scala.concurrent.{ExecutionContext, Future}
+import scala.util.Success
 
 object ApiServer {
   def apply(persistence: PersistenceBase, parserDispatcher: ExecutionContext, config: Config): Behavior[BackendMsg] = {
@@ -124,7 +125,12 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
             onSuccess(persistence.getEventCompetitors(idsList.head, idsList.last)) { e =>
               val event = write(e.map(_.copy(birthYear = "")))
                 .replace("_id", "id")
-              logger.info(s"Number of times competitors have been asked: ${persistence.getEventsLoadCount}")
+              persistence.getEventsLoadCount.onComplete {
+                case Success(value) =>
+                  logger.info(s"Number of times competitors have been asked: $value")
+                case _ =>
+                  logger.error("Unable to get a number how many times competitors have been asked!")
+              }
               val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, event))
               complete(response)
             }
