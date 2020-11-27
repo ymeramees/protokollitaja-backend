@@ -10,7 +10,7 @@ import akka.util.ByteString
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import ee.zone.web.protokollitaja.backend.auth.Authenticator
-import ee.zone.web.protokollitaja.backend.entities.Competition
+import ee.zone.web.protokollitaja.backend.entities.{Competition, DBCompetitor}
 import ee.zone.web.protokollitaja.backend.persistence.PersistenceBase
 import ee.zone.web.protokollitaja.backend.protocol.BackendProtocol.{BackendMsg, GetRoute, SendRoute}
 import org.json4s.jackson.JsonMethods.parse
@@ -141,11 +141,58 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       }
     }
 
+  private val competitorsDataVersion =
+    get {
+      path("competitorsDataVersion" / Segment) { listName =>
+        pathEndOrSingleSlash {
+          onSuccess(persistence.getCompetitorsDataVersion(listName)) { v =>
+            logger.info(s"Competitors data version asked for $listName, responding with $v")
+            complete(StatusCodes.OK -> v.toString)
+          }
+        }
+      }
+    }
+
+  private val competitorsData =
+    ignoreTrailingSlash {
+      path("competitorsData" / Segment) { listName =>
+        Route.seal { // require authentication
+          Authenticator.bcryptAuthAsync("secure site", persistence, Authenticator.bcryptAuthenticator) { userNameAndLevel =>
+            val (_, accessLevel) = userNameAndLevel
+            get {
+              if (accessLevel > 0) {
+                onSuccess(persistence.getCompetitorsData(listName)) { data =>
+                  val response = HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, write(data)))
+                  complete(response)
+                }
+              } else {
+                complete(StatusCodes.Forbidden -> "Insufficient access rights")
+              }
+            } ~ put {
+              if (accessLevel >= 2) {
+                extractRequestEntity { entity =>
+                  requestContext =>
+                    extractData(entity.withSizeLimit(MAX_COMPETITION_PAYLOAD), requestContext).flatMap {
+                      case Some(competitorsDataJson) =>
+                        handleCompetitorsDataSave(listName, competitorsDataJson, requestContext)
+                      case _ =>
+                        requestContext.complete(StatusCodes.BadRequest -> "Unable to extract data")
+                    }
+                }
+              } else {
+                complete(StatusCodes.Forbidden -> "Insufficient access rights")
+              }
+            }
+          }
+        }
+      }
+    }
+
   val route: Route =
     corsHandler(
       pathPrefix("api") {
         pathPrefix("v1") {
-          competitions ~ events ~ results
+          competitions ~ events ~ results ~ competitorsDataVersion ~ competitorsData
         }
       }
     )
@@ -190,6 +237,16 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
     val competition = json.extract[Competition]
     persistence.saveCompetition(competition).map { _ =>
       requestContext.complete(StatusCodes.Created -> s"${competition._id.toString}")
+    } recover {
+      case e: RuntimeException =>
+        requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
+    }
+  }.flatten
+
+  private def handleCompetitorsDataSave(listName: String, json: JValue, requestContext: RequestContext): Future[RouteResult] = {
+    val competitorsDataList = json.extract[Seq[DBCompetitor]]
+    persistence.saveCompetitorsData(listName, competitorsDataList).map { _ =>
+      requestContext.complete(StatusCodes.Created -> "OK")
     } recover {
       case e: RuntimeException =>
         requestContext.complete(StatusCodes.BadRequest -> e.getMessage)

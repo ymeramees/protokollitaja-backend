@@ -1,9 +1,8 @@
 package ee.zone.web.protokollitaja.backend.persistence
 
 import com.github.t3hnar.bcrypt._
-import com.typesafe.config.ConfigFactory
-import ee.zone.web.protokollitaja.backend.WithResources
-import ee.zone.web.protokollitaja.backend.entities.{Competition, User}
+import ee.zone.web.protokollitaja.backend.entities.{Competition, CompetitorsData, DBCompetitor, User}
+import ee.zone.web.protokollitaja.backend.{WithDatabase, WithResources}
 import org.json4s._
 import org.json4s.mongo.ObjectIdSerializer
 import org.mongodb.scala.bson.ObjectId
@@ -15,20 +14,13 @@ import org.scalatest.wordspec.AnyWordSpec
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext}
 
-class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll with WithResources {
+class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll with WithResources with WithDatabase {
 
-  implicit val formats = DefaultFormats + new ObjectIdSerializer
+  implicit val formats: Formats = DefaultFormats + new ObjectIdSerializer
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.global
 
-  val config = ConfigFactory.load()
-  val persistence = new Persistence(config)
-
-  override def afterAll() = {
-    persistence.cleanUpDatabase()
-  }
-
   "Persistence" should {
-    "save new user to the database and return its password from there" in {
+    "save new user to the database and return its password from there" in withDatabase { persistence =>
       val user = User("testuser", "someHashedPassword", 1)
 
       Await.result(persistence.saveUser(user), 1.second)
@@ -39,14 +31,11 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       user.password.isBcryptedSafe(password._1).getOrElse(false) shouldBe true
     }
 
-    "not save duplicate usernames into database" in {
+    "not save duplicate usernames into database" in withDatabase { persistence =>
       val user1 = User("testuser", "someHashedPassword1", 1)
       val user2 = User("testuser", "someHashedPassword2", 1)
 
-      val exception = intercept[RuntimeException] {
-        Await.result(persistence.saveUser(user1), 1.second)
-      }
-      exception.getMessage shouldBe "User with this username already exists!"
+      Await.result(persistence.saveUser(user1), 1.second)
 
       val exception2 = intercept[RuntimeException] {
         Await.result(persistence.saveUser(user2), 1.second)
@@ -58,7 +47,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       users.length shouldBe 1
     }
 
-    "change user password" in {
+    "change user password" in withDatabase { persistence =>
       val password = "someHashedPassword1"
       val user = User("testuser3", password, 1)
       val newPassword = "someNiceNewPass"
@@ -71,7 +60,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       newPassword.isBcryptedSafe(changedPassword.get._1).getOrElse(false) shouldBe true
     }
 
-    "respond with an error to change user password if provided old password is wrong" in {
+    "respond with an error to change user password if provided old password is wrong" in withDatabase { persistence =>
       val password = "someHashedPassword1"
       val user = User("testuser4", password, 1)
       val newPassword = "someNiceNewPass"
@@ -87,7 +76,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       password.isBcryptedSafe(dbPassword.get._1).getOrElse(false) shouldBe true
     }
 
-    "respond with an error to change user password if user does not exist" in {
+    "respond with an error to change user password if user does not exist" in withDatabase { persistence =>
       val password = "someHashedPassword1"
       val user = User("testuser5", password, 1)
       val newPassword = "someNiceNewPass"
@@ -101,7 +90,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       dbPassword shouldBe None
     }
 
-    "return user access level" in {
+    "return user access level" in withDatabase { persistence =>
       val user = User("testuser6", "someHashedPassword", 2)
 
       Await.result(persistence.saveUser(user), 1.second)
@@ -109,12 +98,12 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second).get._2 shouldBe 2
     }
 
-    "return empty Seq if there are no competitions in the DB" in {
+    "return empty Seq if there are no competitions in the DB" in withDatabase { persistence =>
       val headers = persistence.getCompetitionHeaders.futureValue
       headers.length shouldBe 0
     }
 
-    "save and return a competition" in {
+    "save and return a competition" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
           val competition = json.extract[Competition]
@@ -124,10 +113,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitors.length shouldBe 13
           competitors.head.firstName shouldBe "Katrin"
       }
-      persistence.cleanUpDatabase()
     }
 
-    "respond with an error if competition is being saved twice" in {
+    "respond with an error if competition is being saved twice" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
           val competition = json.extract[Competition]
@@ -139,10 +127,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           }
           exception.getMessage shouldBe s"Competition with id ${competition._id} already existing! Use PUT request to update an existing competition!"
       }
-      persistence.cleanUpDatabase()
     }
 
-    "respond with an error if competition with an existing name is being saved" in {
+    "respond with an error if competition with an existing name is being saved" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
           val competition = json.extract[Competition]
@@ -154,10 +141,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           }
           exception.getMessage shouldBe s"Competition with same name already existing, id: ${competition._id}!"
       }
-      persistence.cleanUpDatabase()
     }
 
-    "respond with an error if a new competition id is being updated" in {
+    "respond with an error if a new competition id is being updated" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
           val competition = json.extract[Competition]
@@ -167,10 +153,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           }
           exception.getMessage shouldBe s"Competition with id ${competition._id} not existing! Use POST request to save new competition!"
       }
-      persistence.cleanUpDatabase()
     }
 
-    "update and return updated competition" in {
+    "update and return updated competition" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competition.json") {
         json =>
           val competition = json.extract[Competition]
@@ -183,10 +168,60 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           newCompetition.get.competitionName shouldBe "Test Competition"
           newCompetition.get.events.length shouldBe 0
       }
-      persistence.cleanUpDatabase()
     }
 
-    "return competition headers" in {
+    "save and return competitors data list" in withDatabase { persistence =>
+      withCompetitionJsonFile("testdata/competitorsData.json") { json =>
+        val competitorsData = json.extract[Seq[DBCompetitor]]
+
+        persistence.saveCompetitorsData("rifle", competitorsData).futureValue shouldBe true
+
+        val result = persistence.getCompetitorsData("rifle").futureValue
+        result shouldBe competitorsData
+      }
+    }
+
+    "save competitors data list and return initial version" in withDatabase { persistence =>
+      withCompetitionJsonFile("testdata/competitorsData.json") { json =>
+        val competitorsData = json.extract[Seq[DBCompetitor]]
+
+        persistence.saveCompetitorsData("rifle", competitorsData).futureValue shouldBe true
+
+        persistence.getCompetitorsDataVersion("rifle").futureValue shouldBe 1
+      }
+    }
+
+    "update and return competitors data list" in withDatabase { persistence =>
+      withCompetitionJsonFile("testdata/competitorsData.json") { json =>
+        val competitorsData = json.extract[Seq[DBCompetitor]]
+
+        persistence.saveCompetitorsData("rifle", competitorsData).futureValue shouldBe true
+
+        val newCompetitors = competitorsData :+ DBCompetitor("Paul", "Põld", 2009, "Korstnapühkijad", None, None, 0)
+
+        persistence.saveCompetitorsData("rifle", newCompetitors).futureValue shouldBe true
+
+        val result = persistence.getCompetitorsData("rifle").futureValue
+        result shouldBe newCompetitors
+      }
+    }
+
+    "update list and return increased competitors data list version" in withDatabase { persistence =>
+      withCompetitionJsonFile("testdata/competitorsData.json") { json =>
+        val competitorsData = json.extract[Seq[DBCompetitor]]
+
+
+        persistence.saveCompetitorsData("rifle", competitorsData).futureValue shouldBe true
+
+        val newCompetitors = competitorsData :+ DBCompetitor("Paul", "Põld", 2009, "Korstnapühkijad", None, None, 0)
+
+        persistence.saveCompetitorsData("rifle", newCompetitors).futureValue shouldBe true
+
+        persistence.getCompetitorsDataVersion("rifle").futureValue shouldBe 2
+      }
+    }
+
+    "return competition headers" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
           val competitions = json.extract[List[Competition]]
@@ -205,15 +240,14 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           headers.last.competitionName shouldBe competitions.last.competitionName
           headers.last.timeAndPlace shouldBe competitions.last.timeAndPlace
       }
-      persistence.cleanUpDatabase()
     }
 
-    "return empty Seq if competition Id was not found" in {
+    "return empty Seq if competition Id was not found" in withDatabase { persistence =>
       val headers = persistence.getEventHeaders("5e22ef4c072cb80d41fb6adf").futureValue
       headers.length shouldBe 0
     }
 
-    "return competition events' headers" in {
+    "return competition events' headers" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
           val competitions = json.extract[List[Competition]]
@@ -230,10 +264,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           eventHeaders.last.id shouldBe competitions.head.events.last._id
           eventHeaders.last.eventName shouldBe competitions.head.events.last.eventName
       }
-      persistence.cleanUpDatabase()
     }
 
-    "return requested event" in {
+    "return requested event" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
           val competitions = json.extract[List[Competition]]
@@ -245,10 +278,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitors.length shouldBe 18
           competitors.head.firstName shouldBe "Joosep robin"
       }
-      persistence.cleanUpDatabase()
     }
 
-    "keep and increase events load count" in {
+    "keep and increase events load count" in withDatabase { persistence =>
       withCompetitionJsonFile("testdata/competitions.json") {
         json =>
           val competitions = json.extract[List[Competition]]
@@ -264,7 +296,6 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
 
           persistence.getEventsLoadCount.futureValue shouldBe 1
       }
-      persistence.cleanUpDatabase()
     }
   }
 }

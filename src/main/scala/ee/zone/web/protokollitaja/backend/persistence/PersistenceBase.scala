@@ -12,6 +12,10 @@ abstract class PersistenceBase {
 
   def getCompetitionHeaders: Future[Seq[CompetitionHeader]]
 
+  def getCompetitorsData(listName: String): Future[Seq[DBCompetitor]]
+
+  def getCompetitorsDataVersion(listName: String): Future[Int]
+
   def getEventHeaders(competitionId: String): Future[Seq[EventHeader]]
 
   def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]]
@@ -23,6 +27,8 @@ abstract class PersistenceBase {
   def saveCompetition(newCompetition: Competition): Future[Completed]
 
   def updateCompetition(newCompetition: Competition): Future[Competition]
+
+  def saveCompetitorsData(listName: String, competitors: Seq[DBCompetitor]): Future[Boolean]
 
   def saveUser(newUser: User): Future[Completed]
 

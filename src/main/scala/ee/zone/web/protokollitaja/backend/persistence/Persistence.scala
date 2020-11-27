@@ -23,6 +23,7 @@ class Persistence(config: Config)(implicit ec: ExecutionContext) extends Persist
 
   private val userCodecRegistry = fromRegistries(fromProviders(classOf[User]), DEFAULT_CODEC_REGISTRY)
   private val competitionCodecRegistry = fromRegistries(fromProviders(classOf[Competition], classOf[Event], classOf[Competitor], classOf[Series], classOf[Subtotals]), DEFAULT_CODEC_REGISTRY)
+  private val competitorsDataCodecRegistry = fromRegistries(fromProviders(classOf[CompetitorsData], classOf[DBCompetitor]), DEFAULT_CODEC_REGISTRY)
   private val metricsCodecRegistry = fromRegistries(fromProviders(classOf[Metrics]), DEFAULT_CODEC_REGISTRY)
 
   private val mongoClient = MongoClient(s"mongodb://${config.getString("db.addr")}:${config.getInt("db.port")}")
@@ -36,6 +37,14 @@ class Persistence(config: Config)(implicit ec: ExecutionContext) extends Persist
   private val competitionsCollection: MongoCollection[Competition] = database
     .withCodecRegistry(competitionCodecRegistry)
     .getCollection("competitions")
+
+  private val competitorsDataCollection: MongoCollection[CompetitorsData] = database
+    .withCodecRegistry(competitorsDataCodecRegistry)
+    .getCollection("competitorsdata")
+
+  //  private val pistolCompetitorsCollection: MongoCollection[DBCompetitor] = database
+  //    .withCodecRegistry(dbCompetitorsCodecRegistry)
+  //    .getCollection("pistolcompetitors")
 
   private val metricsCollection: MongoCollection[Metrics] = database
     .withCodecRegistry(metricsCodecRegistry)
@@ -54,10 +63,29 @@ class Persistence(config: Config)(implicit ec: ExecutionContext) extends Persist
   }
 
   def getCompetitionHeaders: Future[Seq[CompetitionHeader]] = {
-    println("Reading competition headers")
     competitionsCollection.find().sort(orderBy(descending("_id"))).toFuture().map { competitions =>
       logger.debug(s"Number of competitions found: ${competitions.length}")
       competitions.map(c => CompetitionHeader(c._id.toString, c.competitionName, c.timeAndPlace))
+    }
+  }
+
+  def getCompetitorsData(listName: String): Future[Seq[DBCompetitor]] = {
+    competitorsDataCollection.find(equal("listName", listName)).headOption().map {
+      case Some(competitorsData) =>
+        logger.debug(s"Number of $listName competitors' data found: ${competitorsData.competitors.length}")
+        competitorsData.competitors
+
+      case _ => Seq()
+    }
+  }
+
+  def getCompetitorsDataVersion(listName: String): Future[Int] = {
+    competitorsDataCollection.find(equal("listName", listName)).headOption().map {
+      case Some(competitorsData) =>
+        logger.debug(s"Version of $listName competitors' data found: ${competitorsData.version}")
+        competitorsData.version
+
+      case _ => -1
     }
   }
 
@@ -170,6 +198,19 @@ class Persistence(config: Config)(implicit ec: ExecutionContext) extends Persist
             logger.info(s"Saving competition: ${newCompetition.competitionName}, id:${newCompetition._id} ")
             competitionsCollection.insertOne(newCompetition).toFuture()
         }
+    }
+  }
+
+  def saveCompetitorsData(listName: String, competitors: Seq[DBCompetitor]): Future[Boolean] = {
+    competitorsDataCollection.find(equal("listName", listName)).headOption.map(_.map(cd => (cd._id, cd.version))).flatMap {
+      case Some((id: ObjectId, version: Int)) =>
+        if(version >= Int.MaxValue - 100) logger.error(s"Competitors' $listName data version getting close to Int.MaxValue")
+        competitorsDataCollection.replaceOne(
+          equal("listName", listName),
+          CompetitorsData(id, listName, version + 1, competitors)
+        ).map(_.wasAcknowledged()).toFuture().map(_.headOption.getOrElse(false))
+      case _ =>
+        competitorsDataCollection.insertOne(CompetitorsData(new ObjectId(), listName, 1, competitors)).toFuture().map(_ => true)
     }
   }
 

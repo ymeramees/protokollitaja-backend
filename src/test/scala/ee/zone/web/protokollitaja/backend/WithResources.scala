@@ -45,12 +45,17 @@ trait WithResources {
   class DummyPersistence(
                           competitionHeadersList: List[CompetitionHeader],
                           eventHeadersList: List[EventHeader],
-                          eventCompetitors: Seq[Competitor]
+                          eventCompetitors: Seq[Competitor],
+                          competitorsData: List[DBCompetitor]
                         )(implicit execContext: ExecutionContext) extends PersistenceBase {
 
     def getCompetition(competitionId: String): Future[Option[Competition]] = ???
 
     def getCompetitionHeaders: Future[Seq[CompetitionHeader]] = Future.successful(competitionHeadersList)
+
+    def getCompetitorsData(listName: String): Future[Seq[DBCompetitor]] = Future.successful(competitorsData)
+
+    def getCompetitorsDataVersion(listName: String): Future[Int] = Future.successful(3)
 
     def getEventHeaders(competitionId: String): Future[Seq[EventHeader]] = Future.successful(eventHeadersList)
 
@@ -64,11 +69,15 @@ trait WithResources {
 
     def updateCompetition(newCompetition: Competition): Future[Competition] = Future(newCompetition)
 
+    def saveCompetitorsData(listName: String, competitors: Seq[DBCompetitor]): Future[Boolean] = Future.successful(true)
+
     def saveUser(newUser: User): Future[Completed] = ???
 
     def getPasswordAndAccessLevel(username: String): Future[Option[(String, Int)]] = {
       username match {
-        case "Someuser34" => Future(Some("$2a$10$JuQdI2SjbZ8cebaNT..Juui5pVjP8FWQEXXds/EvHhZj317RTXxhy", 1))
+        case "TestLvl0User" => Future(Some("$2a$10$JuQdI2SjbZ8cebaNT..Juui5pVjP8FWQEXXds/EvHhZj317RTXxhy", 0))
+        case "TestNormalUser" => Future(Some("$2a$10$JuQdI2SjbZ8cebaNT..Juui5pVjP8FWQEXXds/EvHhZj317RTXxhy", 1))
+        case "TestLvl2User" => Future(Some("$2a$10$JuQdI2SjbZ8cebaNT..Juui5pVjP8FWQEXXds/EvHhZj317RTXxhy", 2))
         case _ => Future(None)
       }
     }

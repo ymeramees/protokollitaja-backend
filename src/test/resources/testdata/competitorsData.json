@@ -1,0 +1,16 @@
+[
+  {
+    "firstName": "Peeter",
+    "lastName": "Pedaal",
+    "birthYear": 1999,
+    "club": "Mighty Ducks",
+    "ordering": 0
+  },
+  {
+    "firstName": "Paavel",
+    "lastName": "Pakiraam",
+    "birthYear": 1909,
+    "club": "Mighty Chicken",
+    "ordering": 0
+  }
+]
