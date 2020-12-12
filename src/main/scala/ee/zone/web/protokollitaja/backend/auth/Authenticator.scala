@@ -11,7 +11,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 object Authenticator extends Directives with LazyLogging {
 
-  def bcryptAuthAsync[T](realm: String, persistence: PersistenceBase, authenticate: (String, String, PersistenceBase) => Future[Option[T]]): Directive1[T] = {
+  def bcryptAuthAsync[T](
+                          realm: String,
+                          persistence: PersistenceBase,
+                          authenticate: (String, String, PersistenceBase) => Future[Option[T]]
+                        ): Directive1[T] = {
     def challenge = HttpChallenges.basic(realm)
 
     extractCredentials.flatMap {
@@ -26,18 +30,28 @@ object Authenticator extends Directives with LazyLogging {
 
   def bcryptAuthenticator(username: String, password: String, persistence: PersistenceBase)
                          (implicit ec: ExecutionContext): Future[Option[(String, Int)]] = {
-    persistence.getPasswordAndAccessLevel(username).map {
-      case Some((dbPassword: String, accessLevel: Int)) =>
-        if (password.isBcryptedSafe(dbPassword)
-          .getOrElse(false)) {
-          logger.info(s"Authorized user $username")
-          Some((username, accessLevel))
-        } else {
-          logger.warn(s"Unsuccessful authorization attempt for user $username!")
-          None
-        }
+    if(username.equals("testuser")) { // Hardcoded test user without any permissions for testing purposes
+      if(password.isBcryptedSafe("$2a$10$EDxsyHPjvKVO3lJEI1Z/3OoYQAIG.GPDKpB77eHW913jA5l2TKruW").getOrElse(false)) {
+        logger.info(s"Authorized user $username")
+        Future.successful(Some(("username", 0)))
+      } else {
+        logger.warn(s"Unsuccessful authorization attempt for user $username!")
+        Future.successful(None)
+      }
+    } else {
+      persistence.getPasswordAndAccessLevel(username).map {
+        case Some((dbPassword: String, accessLevel: Int)) =>
+          if (password.isBcryptedSafe(dbPassword)
+            .getOrElse(false)) {
+            logger.info(s"Authorized user $username")
+            Some((username, accessLevel))
+          } else {
+            logger.warn(s"Unsuccessful authorization attempt for user $username!")
+            None
+          }
 
-      case _ => None
+        case _ => None
+      }
     }
   }
 }
