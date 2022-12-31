@@ -11,7 +11,7 @@ import akka.http.scaladsl.unmarshalling.Unmarshal
 import com.typesafe.config.ConfigFactory
 import com.typesafe.sslconfig.akka.AkkaSSLConfig
 import com.typesafe.sslconfig.ssl.{TrustManagerConfig, TrustStoreConfig}
-import ee.zone.web.protokollitaja.backend.entities.{Competition, Competitor, User}
+import ee.zone.web.protokollitaja.backend.entities.{Competition, Competitor, Event, Team, User}
 import ee.zone.web.protokollitaja.backend.persistence.Persistence
 import ee.zone.web.protokollitaja.backend.server.ServerMain
 import org.json4s._
@@ -63,10 +63,10 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
     }
 
     "return a competition id to new competition POST request and return same competition to next GET request" in {
-      Await.result(persistence.saveUser(User("testuser", "testuserPass", 1)), 1.second)
+      Await.result(persistence.saveUser(User("testuser_lvl1", "testuserPass", 1)), 2.second)
       withTextFile("testdata/competition.json") {
         txt =>
-          val credentials = BasicHttpCredentials("testuser", "testuserPass")
+          val credentials = BasicHttpCredentials("testuser_lvl1", "testuserPass")
           val entity = Marshal(txt).to[MessageEntity].futureValue
           val response = Await.result(Http().singleRequest(
             HttpRequest(method = HttpMethods.POST, uri = "https://localhost:3005/api/v1/competitions")
@@ -99,9 +99,9 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
                 ("_id", s)
               }
           }
-          val receivedCompetitors = json2.extract[List[Competitor]]
-          val excpectedCompetitors = competition.events.filter(_._id == "7").head.competitors.map(_.copy(birthYear = ""))
-          receivedCompetitors shouldEqual excpectedCompetitors
+          val receivedResults = json2.extract[Event]
+          val expectedCompetitors = competition.events.filter(_._id == "7").head.competitors.map(_.copy(birthYear = ""))
+          receivedResults.competitors shouldEqual expectedCompetitors
       }
       persistence.cleanUpDatabase()
     }
@@ -127,9 +127,11 @@ class ServerMainIntegrationTest extends AnyWordSpec with Matchers with BeforeAnd
                 ("_id", s)
               }
           }
-          val receivedCompetitors = json2.extract[List[Competitor]]
-          val excpectedCompetitors = competition.events.filter(_._id == "7").head.competitors.map(_.copy(birthYear = ""))
-          receivedCompetitors shouldEqual excpectedCompetitors
+          val receivedResults = json2.extract[Event]
+          val expectedCompetitors = competition.events.filter(_._id == "7").head.competitors.map(_.copy(birthYear = ""))
+          val expectedTeams = competition.events.filter(_._id == "7").head.teams
+          receivedResults.competitors shouldEqual expectedCompetitors
+          receivedResults.teams shouldEqual expectedTeams
       }
       persistence.cleanUpDatabase()
     }

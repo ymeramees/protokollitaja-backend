@@ -18,7 +18,7 @@ abstract class PersistenceBase {
 
   def getEventHeaders(competitionId: String): Future[Seq[EventHeader]]
 
-  def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]]
+  def getEventResults(competitionId: String, eventId: String): Future[Event]
 
   def getEventsLoadCount: Future[Int]
 

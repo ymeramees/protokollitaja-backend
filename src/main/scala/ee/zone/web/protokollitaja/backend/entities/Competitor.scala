@@ -6,7 +6,7 @@ case class Competitor(
                        lastName: String,
                        birthYear: String,
                        club: String,
-                       subtotals: Option[List[Subtotals]],
+                       subtotals: Option[List[Subtotal]],
                        series: Option[List[Series]], // Not needed here in new format
                        totalResult: String,
                        innerTens: Option[String],

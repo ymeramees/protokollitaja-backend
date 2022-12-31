@@ -22,7 +22,15 @@ import scala.util.{Failure, Success, Try}
 class Persistence(config: Config)(implicit ec: ExecutionContext) extends PersistenceBase with LazyLogging {
 
   private val userCodecRegistry = fromRegistries(fromProviders(classOf[User]), DEFAULT_CODEC_REGISTRY)
-  private val competitionCodecRegistry = fromRegistries(fromProviders(classOf[Competition], classOf[Event], classOf[Competitor], classOf[Series], classOf[Subtotals]), DEFAULT_CODEC_REGISTRY)
+  private val competitionCodecRegistry = fromRegistries(fromProviders(
+    classOf[Competition],
+    classOf[Event],
+    classOf[Competitor],
+    classOf[Series],
+    classOf[Subtotal],
+    classOf[Team],
+    classOf[TeamCompetitor]
+  ), DEFAULT_CODEC_REGISTRY)
   private val competitorsDataCodecRegistry = fromRegistries(fromProviders(classOf[CompetitorsData], classOf[DBCompetitor]), DEFAULT_CODEC_REGISTRY)
   private val metricsCodecRegistry = fromRegistries(fromProviders(classOf[Metrics]), DEFAULT_CODEC_REGISTRY)
 
@@ -101,23 +109,23 @@ class Persistence(config: Config)(implicit ec: ExecutionContext) extends Persist
     }
   }
 
-  def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]] = {
+  def getEventResults(competitionId: String, eventId: String): Future[Event] = {
     getCompetition(competitionId).map {
       case Some(competition) =>
         eventsLoadCountPlusOne()
         competition.events.find(event => event._id == eventId) match {
           case Some(e) =>
-            logger.debug(s"Number of competitiors found in ${competition.competitionName} in ${e.eventName}: ${e.competitors.length}")
-            e.competitors
+            logger.debug(s"Found in ${competition.competitionName} in ${e.eventName}: ${e.competitors.length} competitors and ${e.teams.map(_.length).getOrElse(0)} teams")
+            e
 
           case _ =>
             logger.warn(s"EventId $eventId not found in ${competition.competitionName}!")
-            Seq()
+            Event("", "", List(), Some(List()))
         }
 
       case _ =>
         logger.warn(s"getEent: competitionId $competitionId not found!")
-        Seq()
+        Event("", "", List(), Some(List()))
     }
   }
 

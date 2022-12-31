@@ -7,7 +7,7 @@ services:
       - mongo-data:/data/db
       - mongo-configdb:/data/configdb
     ports:
-      - 27016:27017
+      - 27017:27017
     environment:
       TZ: "Europe/Tallinn"
     networks:

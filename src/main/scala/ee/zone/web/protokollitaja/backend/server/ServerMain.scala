@@ -37,7 +37,7 @@ object ServerMain extends LazyLogging {
       val password = config.getString("server.cert_password").toCharArray
       val certFile = config.getString("server.cert_file")
 
-      if (password.isEmpty)
+      if (password.length <= 0)
         logger.warn("Cert password is empty!")
 
       val file = Paths.get(certFile)

@@ -66,7 +66,7 @@ class ApiServerSpec extends AnyFreeSpec with Matchers with ScalatestRouteTest wi
 
       request ~> route ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldEqual "[{\"id\":\"324\",\"firstName\":\"Paavel\",\"lastName\":\"Pakiraam\",\"birthYear\":\"\",\"club\":\"SharpshootersClub\",\"series\":[],\"totalResult\":\"0,0\",\"innerTens\":\"0\",\"finals\":\"Fin\",\"remarks\":\"\"}]"
+        responseAs[String] shouldEqual "{\"id\":\"4\",\"eventName\":\"TestEvent\",\"competitors\":[{\"id\":\"324\",\"firstName\":\"Paavel\",\"lastName\":\"Pakiraam\",\"birthYear\":\"\",\"club\":\"SharpshootersClub\",\"series\":[],\"totalResult\":\"0,0\",\"innerTens\":\"0\",\"finals\":\"Fin\",\"remarks\":\"\"}],\"teams\":[]}"
       }
     }
 
@@ -75,7 +75,7 @@ class ApiServerSpec extends AnyFreeSpec with Matchers with ScalatestRouteTest wi
 
       request ~> route ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldEqual "[{\"id\":\"324\",\"firstName\":\"Paavel\",\"lastName\":\"Pakiraam\",\"birthYear\":\"\",\"club\":\"SharpshootersClub\",\"series\":[],\"totalResult\":\"0,0\",\"innerTens\":\"0\",\"finals\":\"Fin\",\"remarks\":\"\"}]"
+        responseAs[String] shouldEqual "{\"id\":\"4\",\"eventName\":\"TestEvent\",\"competitors\":[{\"id\":\"324\",\"firstName\":\"Paavel\",\"lastName\":\"Pakiraam\",\"birthYear\":\"\",\"club\":\"SharpshootersClub\",\"series\":[],\"totalResult\":\"0,0\",\"innerTens\":\"0\",\"finals\":\"Fin\",\"remarks\":\"\"}],\"teams\":[]}"
       }
     }
 

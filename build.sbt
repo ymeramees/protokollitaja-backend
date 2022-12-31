@@ -3,11 +3,13 @@ import com.typesafe.sbt.packager.docker.Cmd
 
 enablePlugins(JavaAppPackaging, DockerPlugin)
 
+Global / onChangedBuildSource := ReloadOnSourceChanges
+
 val conf = ConfigFactory.parseFile(new File("src/main/resources/application.conf")).resolve()
 
 name := "protokollitaja-backend"
 
-version := "0.1.2"
+version := "0.1.5"
 
 scalaVersion := "2.13.1"
 

@@ -70,6 +70,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
                         case Some(competitionJson) =>
                           handleCompetitionUpdate(competitionJson, requestContext)
                         case _ =>
+                          logger.error("Unable to extract data")
                           requestContext.complete(StatusCodes.BadRequest -> "Unable to extract data")
                       }
                   }
@@ -90,6 +91,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
                           handleCompetitionSave(competitionJson, requestContext)
 
                         case _ =>
+                          logger.error("Unable to extract data")
                           requestContext.complete(StatusCodes.BadRequest -> "Unable to extract data")
                       }
                   }
@@ -122,8 +124,8 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       path("competitions" / Segments(2)) { idsList =>
         pathEndOrSingleSlash {
           if (idsList.length == 2) {
-            onSuccess(persistence.getEventCompetitors(idsList.head, idsList.last)) { e =>
-              val event = write(e.map(_.copy(birthYear = "")))
+            onSuccess(persistence.getEventResults(idsList.head, idsList.last)) { e =>
+              val event = write(e.copy(competitors = e.competitors.map(_.copy(birthYear = ""))))
                 .replace("_id", "id")
               persistence.getEventsLoadCount.onComplete {
                 case Success(value) =>
@@ -135,6 +137,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
               complete(response)
             }
           } else {
+            logger.error("idsList.length != 2")
             complete(StatusCodes.BadRequest)
           }
         }
@@ -176,10 +179,12 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
                       case Some(competitorsDataJson) =>
                         handleCompetitorsDataSave(listName, competitorsDataJson, requestContext)
                       case _ =>
+                        logger.error("Unable to extract data")
                         requestContext.complete(StatusCodes.BadRequest -> "Unable to extract data")
                     }
                 }
               } else {
+                logger.error(s"Insufficient access rights for ${userNameAndLevel._1}")
                 complete(StatusCodes.Forbidden -> "Insufficient access rights")
               }
             }
@@ -206,7 +211,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
         Some(parse(dataString).transformField { // Hack to serialize id to ObjectId
           case ("id", s: JValue) =>
             val idString = s.extract[String]
-            val competitionIdRegex = "^5(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+$".r // Start with 5, at least 1 letter and 1 digit with only letters and digits
+            val competitionIdRegex = "^(?:5|6|7)(?=.*?\\d)(?=.*?[a-zA-Z])[a-zA-Z\\d]+$".r // Start with 5, 6, or 7, at least 1 letter and 1 digit with only letters and digits
             idString match {
               case competitionIdRegex(_*) =>
                 ("_id", parse("{\"$oid\":\"" + idString + "\"}"))
@@ -228,6 +233,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       requestContext.complete(StatusCodes.OK -> s"${competition._id.toString}")
     } recover {
       case e: RuntimeException =>
+        logger.error(s"handleCompetitionUpdate failed: ${e.getMessage}")
         requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
     }
   }.flatten
@@ -239,6 +245,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       requestContext.complete(StatusCodes.Created -> s"${competition._id.toString}")
     } recover {
       case e: RuntimeException =>
+        logger.error(s"handleCompetitionSave failed: ${e.getMessage}")
         requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
     }
   }.flatten
@@ -249,6 +256,7 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
       requestContext.complete(StatusCodes.Created -> "OK")
     } recover {
       case e: RuntimeException =>
+        logger.error(s"handleCompetitorsDataSave failed: ${e.getMessage}")
         requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
     }
   }.flatten

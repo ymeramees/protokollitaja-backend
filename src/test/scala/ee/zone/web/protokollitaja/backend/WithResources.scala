@@ -19,7 +19,7 @@ trait WithResources {
     val json = parse(resource.mkString).transformField { // Hack to serialize _id to ObjectId
       case ("id", s: JValue) =>
         val idString = s.extract[String]
-        if (idString.startsWith("5e") && idString.length == 24) {
+        if (idString != null && idString.startsWith("5e") && idString.length == 24) {
           ("_id", parse("{\"$oid\":\"" + s.extract[String] + "\"}"))
         } else {
           ("_id", s)
@@ -45,7 +45,7 @@ trait WithResources {
   class DummyPersistence(
                           competitionHeadersList: List[CompetitionHeader],
                           eventHeadersList: List[EventHeader],
-                          eventCompetitors: Seq[Competitor],
+                          eventCompetitors: List[Competitor],
                           competitorsData: List[DBCompetitor]
                         )(implicit execContext: ExecutionContext) extends PersistenceBase {
 
@@ -59,7 +59,8 @@ trait WithResources {
 
     def getEventHeaders(competitionId: String): Future[Seq[EventHeader]] = Future.successful(eventHeadersList)
 
-    def getEventCompetitors(competitionId: String, eventId: String): Future[Seq[Competitor]] = Future.successful(eventCompetitors)
+    def getEventResults(competitionId: String, eventId: String): Future[Event] =
+      Future.successful(Event(eventId, "TestEvent", eventCompetitors, Some(List())))
 
     def getEventsLoadCount: Future[Int] = Future.successful(11)
 

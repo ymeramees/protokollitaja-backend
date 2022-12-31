@@ -11,6 +11,8 @@ services:
     env_file:
       - ./../protokollitaja-backend.env
     container_name: protokollitaja-backend
+    restart:
+      always
     networks:
       - backend
 

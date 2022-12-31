@@ -23,7 +23,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     "save new user to the database and return its password from there" in withDatabase { persistence =>
       val user = User("testuser", "someHashedPassword", 1)
 
-      Await.result(persistence.saveUser(user), 1.second)
+      Await.result(persistence.saveUser(user), 2.second)
 
       val password = Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second).get
 
@@ -52,7 +52,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       val user = User("testuser3", password, 1)
       val newPassword = "someNiceNewPass"
 
-      Await.result(persistence.saveUser(user), 1.second)
+      Await.result(persistence.saveUser(user), 2.second)
       Await.result(persistence.changeUserPassword(user.username, password, newPassword), 2.second)
 
       val changedPassword = persistence.getPasswordAndAccessLevel(user.username).futureValue
@@ -65,7 +65,7 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
       val user = User("testuser4", password, 1)
       val newPassword = "someNiceNewPass"
 
-      Await.result(persistence.saveUser(user), 1.second)
+      Await.result(persistence.saveUser(user), 2.second)
       val exception = intercept[RuntimeException] {
         Await.result(persistence.changeUserPassword(user.username, "someWrongPassword", newPassword), 1.second)
       }
@@ -93,9 +93,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
     "return user access level" in withDatabase { persistence =>
       val user = User("testuser6", "someHashedPassword", 2)
 
-      Await.result(persistence.saveUser(user), 1.second)
+      Await.result(persistence.saveUser(user), 2.second)
 
-      Await.result(persistence.getPasswordAndAccessLevel(user.username), 1.second).get._2 shouldBe 2
+      Await.result(persistence.getPasswordAndAccessLevel(user.username), 2.second).get._2 shouldBe 2
     }
 
     "return empty Seq if there are no competitions in the DB" in withDatabase { persistence =>
@@ -109,9 +109,10 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           val competition = json.extract[Competition]
 
           Await.result(persistence.saveCompetition(competition), 1.second)
-          val competitors = persistence.getEventCompetitors("5e1f495e4e48bd44eba2550b", "5").futureValue
-          competitors.length shouldBe 13
-          competitors.head.firstName shouldBe "Katrin"
+          val results = persistence.getEventResults("5e1f495e4e48bd44eba2550b", "3").futureValue
+          results.competitors.length shouldBe 5
+          results.competitors.head.firstName shouldBe "Anu"
+          results.teams.map(_.length) shouldBe Some(0)
       }
     }
 
@@ -274,9 +275,25 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
           competitions.foreach { competition =>
             Await.result(persistence.saveCompetition(competition), 1.second)
           }
-          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3").futureValue
-          competitors.length shouldBe 18
-          competitors.head.firstName shouldBe "Joosep robin"
+          val results = persistence.getEventResults("5e1ae2cc4cfa124b351b0954", "3").futureValue
+          results.competitors.length shouldBe 18
+          results.competitors.head.firstName shouldBe "Joosep robin"
+          results.teams shouldBe None
+      }
+    }
+
+    "return requested event with teams" in withDatabase { persistence =>
+      withCompetitionJsonFile("testdata/competition.json") {
+        json =>
+          val competition = json.extract[Competition]
+
+          Await.result(persistence.saveCompetition(competition), 1.second)
+
+          val results = persistence.getEventResults("5e1f495e4e48bd44eba2550b", "7").futureValue
+          results.competitors.length shouldBe 0
+          results.teams.map(_.length) shouldBe Some(7)
+          results.teams.get.head.teamName shouldBe "Viljandi I"
+          results.teams.get.head.totalResult shouldBe "1031"
       }
     }
 
@@ -291,8 +308,9 @@ class PersistenceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll w
 
           persistence.getEventsLoadCount.futureValue shouldBe 0
 
-          val competitors = persistence.getEventCompetitors("5e1ae2cc4cfa124b351b0954", "3").futureValue
-          competitors.length shouldBe 18
+          val results = persistence.getEventResults("5e1ae2cc4cfa124b351b0954", "3").futureValue
+          results.competitors.length shouldBe 18
+          results.teams shouldBe None
 
           persistence.getEventsLoadCount.futureValue shouldBe 1
       }

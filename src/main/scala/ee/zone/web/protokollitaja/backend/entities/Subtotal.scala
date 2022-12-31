@@ -1,6 +1,6 @@
 package ee.zone.web.protokollitaja.backend.entities
 
-case class Subtotals(
+case class Subtotal(
                       series: List[Series],
                       label: String,
                       subtotal: String
