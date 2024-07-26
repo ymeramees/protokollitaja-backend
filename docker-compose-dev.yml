@@ -1,11 +1,12 @@
-version: "3.7"
 services:
   db:
     image: mongo
+    restart: unless-stopped
     container_name: mongodb
     volumes:
       - mongo-data:/data/db
       - mongo-configdb:/data/configdb
+      - /data/protokollitaja-backup:/backup
     ports:
       - 27017:27017
     environment:
@@ -18,7 +19,8 @@ services:
     volumes:
       - /data:/data
     ports:
-      - 3004:3005
+      - 3004:3004
+      - 3005:3005
     environment:
       TZ: "Europe/Tallinn"
     env_file:

@@ -9,9 +9,9 @@ val conf = ConfigFactory.parseFile(new File("src/main/resources/application.conf
 
 name := "protokollitaja-backend"
 
-version := "0.1.5"
+version := "0.1.6"
 
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.10"
 
 libraryDependencies ++= {
   val akkaVersion = "2.6.+"
@@ -51,7 +51,7 @@ mainClass in (Compile, run) := Some("ee.zone.web.protokollitaja.backend.server.S
 mainClass in (Compile, packageBin) := Some("ee.zone.web.protokollitaja.backend.server.ServerMain")
 
 dockerBaseImage := "openjdk:8-jre"
-dockerExposedPorts := Seq(conf.getInt("server.port"))
+dockerExposedPorts := Seq(conf.getInt("server.httpsPort"), conf.getInt("server.httpPort"))
 dockerExposedVolumes := Seq("/data")
 dockerUpdateLatest := true
 //dockerCommands += Cmd("USER", "protokollitaja")

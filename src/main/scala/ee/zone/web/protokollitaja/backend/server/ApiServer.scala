@@ -16,7 +16,7 @@ import ee.zone.web.protokollitaja.backend.protocol.BackendProtocol.{BackendMsg, 
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization.write
 import org.json4s.mongo.ObjectIdSerializer
-import org.json4s.{DefaultFormats, Formats, JValue}
+import org.json4s.{DefaultFormats, Formats, JValue, MappingException}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Success
@@ -88,8 +88,13 @@ class ApiServer(context: ActorContext[BackendMsg], persistence: PersistenceBase,
                     requestContext =>
                       extractData(entity.withSizeLimit(MAX_COMPETITION_PAYLOAD), requestContext).flatMap {
                         case Some(competitionJson) =>
-                          handleCompetitionSave(competitionJson, requestContext)
-
+                          try {
+                            handleCompetitionSave(competitionJson, requestContext)
+                          } catch {
+                            case e: MappingException =>
+                              logger.error(s"handleCompetitionSave failed: ${e.getMessage}\nfor json: $competitionJson")
+                              requestContext.complete(StatusCodes.BadRequest -> e.getMessage)
+                          }
                         case _ =>
                           logger.error("Unable to extract data")
                           requestContext.complete(StatusCodes.BadRequest -> "Unable to extract data")

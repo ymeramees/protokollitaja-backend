@@ -1,20 +1,40 @@
-version: "3.7"
 services:
+  db:
+    image: mongo
+    restart: always
+    container_name: protokollitaja-mongo
+    volumes:
+      - mongo-data:/data/dbex
+      - mongo-configdb:/data/configdb
+      - /data/protokollitaja-backup:/backup
+    environment:
+      TZ: "Europe/Tallinn"
+    networks:
+      - backend
+
   protokollitaja-backend:
     image: protokollitaja-backend
     volumes:
       - /data:/data
     ports:
+      - 3004:3004
       - 3005:3005
     environment:
       TZ: "Europe/Tallinn"
     env_file:
       - ./../protokollitaja-backend.env
     container_name: protokollitaja-backend
-    restart:
-      always
+    restart: always
     networks:
       - backend
+    depends_on:
+      - db
 
 networks:
   backend:
+
+volumes:
+  mongo-data:
+    name: mongo-data
+  mongo-configdb:
+    name: mongo-configdb
